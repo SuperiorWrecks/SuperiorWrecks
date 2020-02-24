@@ -25,7 +25,7 @@ SECRET_KEY = '_$d16d=8@r_u4o(#vt1i=g8$pd3r5f&c-p@thqsct_829g%xlt'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["superiorwrecks.epicwebsite.net", "ec2-18-189-21-31.us-east-2.compute.amazonaws.com"]
 
 
 # Application definition
