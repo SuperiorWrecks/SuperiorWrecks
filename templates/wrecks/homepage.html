@@ -1,48 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>SuperiorWrecks</title>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-  <style>
-    /* Always set the map height explicitly to define the size of the div
-     * element that contains the map. */
-    #map {
-      height: 100%;
-    }
-    /* Optional: Makes the sample page fill the window. */
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>SuperiorWrecks</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 100%;
+        }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        #legend {
+            font-family: Arial, sans-serif;
+            background: #fff;
+            padding: 10px;
+            margin: 10px;
+            border: 3px solid #000;
+          }
+          #legend h3 {
+            margin-top: 0;
+          }
+          #legend img {
+            vertical-align: middle;
+          }
+
+    </style>
 </head>
 <body>
-<h1>Superior Wrecks</h1>
 <div id="map"></div>
+<div id="title"><h1>Superior Wrecks</h1></div>
+<div id="legend"><h3>Legend</h3></div>
 <script>
     var map;
     var markers = [];
+    var ships = [];
+    {#var iconBase = "/static/img/";#}
+    var iconBase = "https://maps.google.com/mapfiles/kml/shapes/";
+    var icons = {
+        blue: {
+            name: "2000+",
+            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Gfi-set01-lost-ship_-00f.svg/32px-Gfi-set01-lost-ship_-00f.svg.png"
+        },
+        green: {
+            name: "1900-1999",
+            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Gfi-set01-lost-ship_-080.svg/32px-Gfi-set01-lost-ship_-080.svg.png"
+        },
+        red: {
+            name: "1899 and before",
+            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Gfi-set01-lost-ship_-f00.svg/32px-Gfi-set01-lost-ship_-f00.svg.png"
+        },
+        black: {
+            name: "Unknown",
+            icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Gfi-set01-lost-ship.svg/32px-Gfi-set01-lost-ship.svg.png"
+        }
+    };
+
+    function addMarker(ship) {
+        var contentString = "<h4>" + ship["name"] + "</h4><p>Ship Number: " + ship["num"] + "</p>";
+
+        var infoWindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var icon;
+        if(ship["year_sunk"] == null) {
+            icon = icons.black.icon;
+        } else if (ship["year_sunk"] < 1900) {
+            icon = icons.red.icon;
+        } else if (ship["year_sunk"] < 2000) {
+            icon = icons.green.icon;
+        } else {
+            icon = icons.blue.icon;
+        }
+
+        var marker = new google.maps.Marker({
+            position: {lat: ship["latitude"], lng: ship["longitude"]},
+            icon: icon,
+            map: map
+        });
+        marker.addListener('mouseover', () => infoWindow.open(map, marker))
+        marker.addListener('mouseout', () => infoWindow.close())
+
+        //TODO: Add onclick listener to pop out sidebar with more info
+        markers.push(marker);
+    }
+
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: {lat: 47.598154161430784, lng: -87.83654097677832},
-            zoom: 8
+            zoom: 8,
+            streetViewControl: false,
+            fullscreenControl: false,
+            mapTypeControl: false,
         });
-{% if wrecks %}
-    {% for wreck in wrecks %}
-        {%  if wreck.latitude is not None and wreck.longitude is not None %}
-    markers.push(new google.maps.Marker({position: {lat: {{ wreck.latitude }}, lng: {{ wreck.longitude }}}, map: map}));
-        {% endif %}
-    {% endfor %}
-{% endif %}
+
+        var legend = document.getElementById('legend');
+        for (var key in icons) {
+          var type = icons[key];
+          var name = type.name;
+          var icon = type.icon;
+          var div = document.createElement('div');
+          div.innerHTML = '<img src="' + icon + '"> ' + name;
+          legend.appendChild(div);
+        }
+
+        map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById("title"));
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status === 200) {
+                ships = JSON.parse(this.responseText);
+                ships.forEach(addMarker);
+            }
+        };
+        xmlhttp.open("GET", "/wrecks/markers.json", true);
+        xmlhttp.send();
+
     }
 </script>
 
-<script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap" type="text/javascript"></script>
+<script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
+        type="text/javascript"></script>
 
 </body>
 </html>

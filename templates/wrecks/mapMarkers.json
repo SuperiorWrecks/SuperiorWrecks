@@ -1,0 +1,14 @@
+        {% if wrecks %}
+            {% for wreck in wrecks %}
+                {%  if wreck.latitude is not None and wreck.longitude is not None %}
+                    markers.push(new google.maps.Marker({
+                        position: {
+                            lat: {{ wreck.latitude }},
+                            lng: {{ wreck.longitude }}
+                        },
+                        icon: icons["ferry"]["icon"],
+                        map: map
+                    }));
+                {% endif %}
+            {% endfor %}
+        {% endif %}
