@@ -29,3 +29,12 @@ def markers(request):
                 {"name": ship.ship_name, "num": ship.ship_num, "latitude": float(ship.latitude),
                  "longitude": float(ship.longitude), "year_sunk": year})
     return JsonResponse(data, safe=False)
+
+
+def allShips(request):
+    data = []
+    for ship in Wrecks.objects.all():
+        year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
+        entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year}
+        data.append(entry)
+    return JsonResponse(data, safe=False)
