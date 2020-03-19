@@ -20,6 +20,13 @@ def homepage(request):
     return render(request, 'wrecks/homepage.html', context)
 
 
+def listofships(request):
+    context = {
+        'wrecks': Wrecks.objects.all()
+    }
+    return render(request, 'wrecks/listofships.html', context)
+
+
 def markers(request):
     data = []
     for ship in Wrecks.objects.all():
