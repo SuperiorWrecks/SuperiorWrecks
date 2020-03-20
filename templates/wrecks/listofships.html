@@ -24,7 +24,7 @@
             background-image: linear-gradient(white, #E5F6F6);
             font-size: 40px;
             font-family: 'Berkshire Swash', cursive;
-            z-index: 1;
+            z-index: 2;
         }
 
         .sidebar-left {
@@ -34,7 +34,7 @@
             top: var(--header-height);
             left: 0;
             position: fixed;
-            z-index: 2;
+            z-index: 3;
         }
 
         .sidebar-left a {
@@ -53,7 +53,30 @@
             width: calc(100% - var(--sidebar-width));
             height: calc(100% - var(--footer-height));
             margin-left: var(--sidebar-width);
-            top: var(--header-height);
+            top: 0;
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        #content a:hover {
+            color: #3b3d80;
+        }
+
+        #content b {
+            font-family: "Berkshire Swash", cursive;
+            font-size: 22px;
+        }
+
+        #background {
+            background-image: linear-gradient(#E4F5F5, #D0F0F0);
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: transparent;
+            position: fixed;
+            z-index: 0;
         }
 
         html, body {
@@ -75,6 +98,8 @@
         #table {
             height: 100%;
             width: 75%;
+            margin-left: 5px;
+            margin-top: 12px;
         }
 
         #footer {
@@ -95,6 +120,10 @@
 
 <body>
 
+<div id="background">
+    test it
+</div>
+
 <div class="header">
     <h1>Superior Wrecks</h1>
 </div>
@@ -103,7 +132,7 @@
     <form class="bd-search d-flex align-items-center">
         <input type="search" class="form-control ds-input" placeholder="Search for a Wreck">
     </form>
-    <a href="wrecks/listofships.html">List all Wrecks</a>
+    <a href="/">Back to Map</a>
     <a href="#">More Information</a>
     <a href="#">Other Menu Items</a>
 </nav>
@@ -115,9 +144,9 @@
     <table id="table">
         <thead>
         <tr>
-            <th>Ship Name</th>
-            <th>Ship Number</th>
-            <th>Year Sunk</th>
+            <th><b>Ship Name</b></th>
+            <th><b>Ship Number</b></th>
+            <th><b>Year Sunk</b></th>
         </tr>
         </thead>
     </table>
