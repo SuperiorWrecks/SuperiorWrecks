@@ -2,8 +2,11 @@ import os
 import dotenv
 import logging
 
+from django.http import Http404
 from django.shortcuts import render
 from django.http import JsonResponse
+from django.core.exceptions import ObjectDoesNotExist
+from django.forms.models import model_to_dict
 
 from .models import Wrecks
 
@@ -15,16 +18,12 @@ logger = logging.getLogger(__name__)
 def homepage(request):
     context = {
         'GOOGLE_API_KEY': os.getenv("GOOGLE_API_KEY"),
-        'wrecks': Wrecks.objects.all()
     }
     return render(request, 'wrecks/homepage.html', context)
 
 
 def listofships(request):
-    context = {
-        'wrecks': Wrecks.objects.all()
-    }
-    return render(request, 'wrecks/listofships.html', context)
+    return render(request, 'wrecks/listofships.html')
 
 
 def markers(request):
@@ -45,3 +44,12 @@ def allShips(request):
         entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year}
         data.append(entry)
     return JsonResponse(data, safe=False)
+
+
+def detail(request, name, num):
+    try:
+        ship = Wrecks.objects.get(ship_name=name, ship_num=num)
+    except ObjectDoesNotExist:
+        raise Http404("Ship not found")
+    # TODO: Pass ship as context into a template
+    return JsonResponse(model_to_dict(ship), safe=False)
