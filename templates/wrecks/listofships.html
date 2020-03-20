@@ -4,28 +4,43 @@
     <meta charset="UTF-8">
     <title>Ship List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Trade+Winds|Yanone+Kaffeesatz|Berkshire+Swash&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Berkshire+Swash&display=swap" rel="stylesheet">
     <style>
         :root {
             --sidebar-width: 200px;
             --footer-height: 25px;
+            --header-height: 60px;
+            --body-font-size: 20px;
+        }
+
+        .header {
+            width: 100%;
+            height: var(--header-height);
+            top: 0;
+            left: 0;
+            position: fixed;
+            text-align: center;
+            color: #1a1b3a;
+            background-image: linear-gradient(white, #E5F6F6);
+            font-size: 40px;
+            font-family: 'Berkshire Swash', cursive;
+            z-index: 1;
         }
 
         .sidebar-left {
             width: var(--sidebar-width);
-            height: calc(100% - var(--footer-height));
-            background-color: #D0F0F0;
-            top: 0;
+            height: calc(100% - var(--footer-height) - var(--header-height));
+            background-image: linear-gradient(#E5F6F6, #D0F0F0);
+            top: var(--header-height);
             left: 0;
             position: fixed;
-            z-index: 1;
+            z-index: 2;
         }
 
         .sidebar-left a {
             padding: 6px 8px 6px 16px;
             text-decoration: none;
-            font-size: 18pt;
+            font-size: 22px;
             color: #1a1b3a;
             display: block;
         }
@@ -38,6 +53,7 @@
             width: calc(100% - var(--sidebar-width));
             height: calc(100% - var(--footer-height));
             margin-left: var(--sidebar-width);
+            top: var(--header-height);
         }
 
         html, body {
@@ -45,7 +61,8 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            font-family: 'Yanone Kaffeesatz', sans-serif;
+            font-family: 'Baloo Chettan 2', cursive;
+            font-size: 18px;
         }
 
         form {
@@ -63,6 +80,8 @@
         #footer {
             height: var(--footer-height);
             width: 100%;
+            position: fixed;
+            top: calc(100% - var(--footer-height));
             background-color: #1a1b3a;
             color: #d0f0f0;
             font-size: 12px;
@@ -76,17 +95,23 @@
 
 <body>
 
+<div class="header">
+    <h1>Superior Wrecks</h1>
+</div>
+
 <nav class="sidebar-left">
     <form class="bd-search d-flex align-items-center">
         <input type="search" class="form-control ds-input" placeholder="Search for a Wreck">
     </form>
-    <a href="#">Map</a>
+    <a href="wrecks/listofships.html">List all Wrecks</a>
     <a href="#">More Information</a>
     <a href="#">Other Menu Items</a>
 </nav>
 
 <!-- Page Content -->
 <div id="content">
+    <br>
+    <br>
     <table id="table">
         <thead>
         <tr>
@@ -95,8 +120,8 @@
             <th>Year Sunk</th>
         </tr>
         </thead>
-
     </table>
+    <br>
 </div>
 
 <div id="footer">
