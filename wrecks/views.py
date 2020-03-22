@@ -18,12 +18,16 @@ logger = logging.getLogger(__name__)
 def homepage(request):
     context = {
         'GOOGLE_API_KEY': os.getenv("GOOGLE_API_KEY"),
+        "page": "map",
     }
     return render(request, 'wrecks/homepage.html', context)
 
 
 def listofships(request):
-    return render(request, 'wrecks/listofships.html')
+    context = {
+        "page": "ships"
+    }
+    return render(request, 'wrecks/listofships.html', context)
 
 
 def markers(request):
