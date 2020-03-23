@@ -6,9 +6,11 @@ from django.http import Http404
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
-from django.forms.models import model_to_dict
 
 from .models import Wrecks
+from .models import Photos
+from .models import Stories
+from .models import References
 
 dotenv.load_dotenv(dotenv.find_dotenv())
 
@@ -51,9 +53,22 @@ def allShips(request):
 
 
 def detail(request, name, num):
+    name = name.replace("_", " ")
+    num = num.replace("_", " ")
     try:
         ship = Wrecks.objects.get(ship_name=name, ship_num=num)
     except ObjectDoesNotExist:
         raise Http404("Ship not found")
-    # TODO: Pass ship as context into a template
-    return JsonResponse(model_to_dict(ship), safe=False)
+
+    photos = Photos.objects.filter(ship_name=name, ship_num=num).order_by('num')
+    stories = Stories.objects.filter(ship_name=name, ship_num=num).order_by('num')
+    references = References.objects.filter(ship_name=name, ship_num=num).order_by('num')
+
+    context = {
+        "ship": ship,
+        "photos": photos,
+        "stories": stories,
+        "references": references,
+        "page": "detail",
+    }
+    return render(request, 'wrecks/shipdetail.html', context)

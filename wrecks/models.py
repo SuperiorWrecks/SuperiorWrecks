@@ -59,6 +59,7 @@ class Photos(models.Model):
     ship_num = models.ForeignKey('Wrecks', models.DO_NOTHING, db_column='ship_num', related_name="+")
     num = models.IntegerField(blank=True, null=True)
     title = models.TextField(blank=True, null=True)
+    photo = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False

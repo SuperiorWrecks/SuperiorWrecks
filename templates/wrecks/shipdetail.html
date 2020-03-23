@@ -1,0 +1,77 @@
+{% extends "wrecks/template.html" %}
+{% block title %}
+    <title>Ship Detail: {{ ship.ship_name }}</title>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        #content {
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    <h1>{{ ship.ship_name }}</h1>
+    <h2>Ship Number: {{ ship.ship_num }}</h2>
+    <p> Sank:
+        {% if ship.date_sunk is not None %}
+            {{ ship.date_sunk }}
+        {% elif ship.year_sunk is not None %}
+            {{ ship.year_sunk }}
+        {% else %}
+            Unknown
+        {% endif %}
+    </p>
+
+    {% if ship.crew is not None %}
+        <p>
+            Crew: {{ ship.crew }}
+        </p>
+    {% endif %}
+
+    {% if ship.deaths is not None %}
+        <p>
+            Deaths: {{ ship.deaths }}
+        </p>
+    {% endif %}
+
+    {% if ship.date_built is not None or ship.date_built is not None or ship.built_by is not None %}
+        <p> Built
+            {% if ship.date_built is not None %}
+                on {{ ship.date_built }}
+            {% elif ship.year_built is not None %}
+                in {{ ship.year_built }}
+            {% endif %}
+            {% if ship.built_by is not None %}
+                by {{ ship.built_by }}
+            {% endif %}
+        </p>
+    {% endif %}
+
+    {% for photo in photos %}
+        <figure>
+            <img src="{{ photo.photo }}" class="figure-img img-fluid rounded"/>
+            <figcaption class="figure-caption">{{ photo.title }}</figcaption>
+        </figure>
+    {% endfor %}
+
+    {% for story in stories %}
+        <p>
+            {{ story.content }}
+        </p>
+    {% endfor %}
+
+    {% if references.exists %}
+        <p>References:
+        <ul>
+            {% for reference in references %}
+                <li><cite><a href="{{ reference.url }}">{{ reference.text }}</a></cite></li>
+            {% endfor %}
+        </ul>
+        </p>
+    {% endif %}
+
+{% endblock %}

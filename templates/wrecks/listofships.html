@@ -2,6 +2,7 @@
 {% block title %}
     <title>Ship List</title>
 {% endblock %}
+
 {% block styles %}
     <style>
         #content {
@@ -49,10 +50,12 @@
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
+            var url_name = ship["name"].replace(/ /g, "_");
+            var url_num = ship["num"].replace(/ /g, "_");
             //TODO: This way of adding links feels janky, find a cleaner way to do it. maybe a wrapper function or something
-            cell1.innerHTML = "<a href=\"/ships/" + ship["name"] + "/" + ship["num"] + "/\">" + ship["name"] + "</a>";
-            cell2.innerHTML = "<a href=\"/ships/" + ship["name"] + "/" + ship["num"] + "/\">" + ship["num"] + "</a>";
-            cell3.innerHTML = "<a href=\"/ships/" + ship["name"] + "/" + ship["num"] + "/\">" + ship["year"] + "</a>";
+            cell1.innerHTML = "<a href=\"/ships/" + url_name + "/" + url_num + "/\">" + ship["name"] + "</a>";
+            cell2.innerHTML = "<a href=\"/ships/" + url_name + "/" + url_num + "/\">" + ship["num"] + "</a>";
+            cell3.innerHTML = "<a href=\"/ships/" + url_name + "/" + url_num + "/\">" + ship["year"] + "</a>";
             console.log(ship["name"] + ship["num"] + ship["year"]);
         }
 
