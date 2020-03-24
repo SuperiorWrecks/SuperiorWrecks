@@ -25,7 +25,7 @@ dotenv.load_dotenv(dotenv.find_dotenv("{BASE_DIR}/SuperiorWrecks/.env".format(BA
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = (os.getenv("PRODUCTION", "false") != "true")
 
 ALLOWED_HOSTS = ["superiorwrecks.epicwebsite.net", "127.0.0.1"]
 
