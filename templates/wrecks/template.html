@@ -27,7 +27,7 @@
     <ul class="list-unstyled components">
         <li>
             <form class="bd-search d-flex align-items-center">
-                <input type="search" class="form-control ds-input" placeholder="Search for a Wreck">
+                <input id="search" type="search" class="form-control ds-input" placeholder="Search for a Wreck" onkeyup="funct()">
             </form>
         </li>
         {% if page != "map" %}
@@ -63,6 +63,10 @@
 
 {# Scripts #}
 {% block scripts %}
+    <script>
+    function funct() {
+    }
+    </script>
 {% endblock %}
 
 {# Jquery and bootstrap #}
