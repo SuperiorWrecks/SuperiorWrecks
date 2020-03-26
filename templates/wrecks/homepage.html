@@ -81,7 +81,9 @@
             var marker = new google.maps.Marker({
                 position: {lat: ship["latitude"], lng: ship["longitude"]},
                 icon: icon,
-                map: map
+                map: map,
+                name: ship["name"],
+                infoWindow
             });
             marker.addListener('mouseover', () => infoWindow.open(map, marker))
             marker.addListener('mouseout', () => infoWindow.close())
@@ -126,7 +128,23 @@
         }
 
         function funct() {
+            var input = document.getElementById("search");
+            var keyword = input.value.toUpperCase();
+            var marks = markers;
 
+            for(var i = 0; i < markers.length; i++) {
+                loc = new google.maps.LatLng(markers[i].position.lat(), markers[i].position.lng());
+                if(markers[i]["name"].toUpperCase().indexOf(keyword) <= -1) {
+                    markers[i].setMap(null);
+                } else {
+                    markers[i].setMap(map);
+                }
+                if(markers[i]["name"].toUpperCase().localeCompare(keyword) === 0) {
+                    markers[i]["infoWindow"].open(map, markers[i]);
+                } else {
+                    markers[i]["infoWindow"].close();
+                }
+            }
         }
 
     </script>
