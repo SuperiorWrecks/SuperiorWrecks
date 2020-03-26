@@ -1,6 +1,51 @@
 {% extends "wrecks/template.html" %}
 {% block styles %}
     <style>
+        .sidebar-right {
+            width: var(--sidebar-width);
+            height: calc(100% - var(--footer-height) - var(--header-height));
+            background-image: linear-gradient(#E5F6F6, #D0F0F0);
+            top: var(--header-height);
+            left: calc(100% - var(--sidebar-width));
+            position: fixed;
+            z-index: 3;
+            box-shadow: -4px -1px 8px -2px rgba(0, 0, 0, 0.2), -6px -1px 20px -2px rgba(0, 0, 0, 0.19);
+            padding: 6px 8px 6px 16px;
+        }
+
+        .sidebar-right h1 {
+            font-size: 30px;
+            color: #1a1b3a;
+            font-family: "Berkshire Swash", cursive;
+        }
+
+        .sidebar-right a {
+            text-decoration: none;
+            font-size: 22px;
+            color: #1a1b3a;
+            display: block;
+        }
+
+        .sidebar-right button {
+            color: #D0F0F0;
+            background: #1a1b3a;
+            border: none;
+            font-size: 8px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+            padding: 3px 7px;
+            float: right;
+        }
+
+        .sidebar-right button:hover {
+            box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
+        }
+
+        .sidebar-right a:hover {
+            color: #3b3d80;
+        }
+
         #legend {
             background: #d0f0f0;
             padding: 10px;
@@ -20,7 +65,6 @@
             vertical-align: middle;
         }
 
-
         /* Always set the map height explicitly to define the size of the div element that contains the map. */
         #map {
             height: 100%;
@@ -32,6 +76,15 @@
 {% block content %}
     <div id="map"></div>
     <div id="legend"><h3>Legend</h3></div>
+{% endblock %}
+
+{% block noncontent %}
+    <div class="sidebar-right" hidden>
+        <button type="button" onclick="hideSidebar()">X</button>
+        <h1>Insert Ship Title</h1>
+        Basic info about the ship
+        <a href="#">Click for more details</a>
+    </div>
 {% endblock %}
 
 {% block scripts %}
@@ -86,6 +139,7 @@
                 infoWindow
             });
             marker.addListener('mouseover', () => infoWindow.open(map, marker))
+            marker.addListener('click', () => showSidebar(marker))
             marker.addListener('mouseout', () => infoWindow.close())
 
             //TODO: Add onclick listener to pop out sidebar with more info
@@ -150,4 +204,29 @@
     </script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
             type="text/javascript"></script>
+    <script>
+        function showSidebar(marker) {
+            var x = document.getElementsByClassName("sidebar-right");
+            var map = document.getElementById("map");
+            var name = marker.name;
+            if (x[0].hasAttribute("hidden")) {
+                x[0].removeAttribute("hidden");
+            } else if (x[0].style.display === "none") {
+                x[0].style.display = "block";
+                map.style.width = "calc(100% - 200px)";
+            }
+            x[0].style.display = "block";
+            map.style.width = "calc(100% - 200px)";
+
+            //Format the side bar
+            x[0].innerHTML = "<button type=\"button\" onclick=\"hideSidebar()\">X</button><h1>" + name + "</h1>";
+        }
+
+        function hideSidebar() {
+            var x = document.getElementsByClassName("sidebar-right");
+            var map = document.getElementById("map");
+            x[0].style.display = "none";
+            map.style.width = "100%";
+        }
+    </script>
 {% endblock %}
