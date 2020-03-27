@@ -2,11 +2,11 @@
 {% block styles %}
     <style>
         .sidebar-right {
-            width: var(--sidebar-width);
+            width: calc(var(--sidebar-width) + 50px);
             height: calc(100% - var(--footer-height) - var(--header-height));
             background-image: linear-gradient(#E5F6F6, #D0F0F0);
             top: var(--header-height);
-            left: calc(100% - var(--sidebar-width));
+            left: calc(100% - var(--sidebar-width) - 50px);
             position: fixed;
             z-index: 3;
             box-shadow: -4px -1px 8px -2px rgba(0, 0, 0, 0.2), -6px -1px 20px -2px rgba(0, 0, 0, 0.19);
@@ -201,10 +201,6 @@
             }
         }
 
-    </script>
-    <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
-            type="text/javascript"></script>
-    <script>
         function showSidebar(marker) {
             var x = document.getElementsByClassName("sidebar-right");
             var map = document.getElementById("map");
@@ -216,10 +212,20 @@
                 map.style.width = "calc(100% - 200px)";
             }
             x[0].style.display = "block";
-            map.style.width = "calc(100% - 200px)";
+            map.style.width = "calc(100% - 250px)";
+
+            var latitude;
+            var longitude;
+
+            for(var i = 0; i < ships.length; i++){
+                if(ships[i]["name"] === name){
+                    latitude = ships[i]["latitude"];
+                    longitude = ships[i]["longitude"];
+                }
+             }
 
             //Format the side bar
-            x[0].innerHTML = "<button type=\"button\" onclick=\"hideSidebar()\">X</button><h1>" + name + "</h1>";
+            x[0].innerHTML = "<button type=\"button\" onclick=\"hideSidebar()\">X</button><h1>" + name + "</h1>" + latitude + longitude;
         }
 
         function hideSidebar() {
@@ -229,4 +235,7 @@
             map.style.width = "100%";
         }
     </script>
+
+    <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
+            type="text/javascript"></script>
 {% endblock %}
