@@ -39,7 +39,7 @@ def markers(request):
             year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
             data.append(
                 {"name": ship.ship_name, "num": ship.ship_num, "latitude": float(ship.latitude),
-                 "longitude": float(ship.longitude), "year_sunk": year})
+                 "longitude": float(ship.longitude), "year_sunk": year, "deaths": ship.deaths})
     return JsonResponse(data, safe=False)
 
 

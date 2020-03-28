@@ -214,18 +214,46 @@
             x[0].style.display = "block";
             map.style.width = "calc(100% - 250px)";
 
+            var num;
             var latitude;
             var longitude;
+            var year;
+            var deaths;
 
             for(var i = 0; i < ships.length; i++){
                 if(ships[i]["name"] === name){
                     latitude = ships[i]["latitude"];
                     longitude = ships[i]["longitude"];
+                    year = ships[i]["year_sunk"];
+                    deaths = ships[i]["deaths"];
+                    num = ships[i]["num"];
+                    break;
                 }
              }
 
+            var url_name = name.replace(/ /g, "_");
+            var url_num = num.replace(/ /g, "_");
+
+            var buttonHTML = "<button type=\"button\" onclick=\"hideSidebar()\">X</button><h1>" + name + "</h1>";
+            var urlHTML = "<a href=\"/ships/" + url_name + "/" + url_num + "/\">Learn More</a>";
+            var yearHTML;
+            var deathsHTML;
+
+            if(year === null) {
+                yearHTML = " ";
+            } else {
+                yearHTML = "<br>Year Sunk: " + year;
+            }
+            if(deaths === null) {
+                deathsHTML = " ";
+            } else {
+                deathsHTML = "<br>Deaths: " + deaths;
+            }
+
             //Format the side bar
-            x[0].innerHTML = "<button type=\"button\" onclick=\"hideSidebar()\">X</button><h1>" + name + "</h1>" + latitude + longitude;
+            x[0].innerHTML = buttonHTML + "Ship Number: " + num + "<br>Latitude: " + latitude + "<br>Longitude: " +
+                longitude + yearHTML + deathsHTML + urlHTML;
+
         }
 
         function hideSidebar() {
