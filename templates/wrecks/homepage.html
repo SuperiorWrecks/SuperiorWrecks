@@ -166,6 +166,33 @@
                 legend.appendChild(div);
             }
 
+            /*
+            var filterYears = // get data value;
+            legend.type.select("icon")
+            .on("click", function (e){
+
+                var hideIcon = false;
+                var newFilter = [];
+
+                //if filter has clicked icon, hide it
+                filterYears.forEach(function (f){
+                    if (f === e.slice(-1)[0]){
+                        hideIcon = true;
+                    } else {
+                        newFilter.push(f);
+                    }
+                });
+                //hiding shape
+                if(hideIcon) {
+
+                } else {
+
+                }
+                //update
+
+            });
+             */
+
             map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
             map.controls[google.maps.ControlPosition.TOP_CENTER].push(document.getElementById("title"));
 
