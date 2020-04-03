@@ -14,6 +14,7 @@
 {% endblock %}
 
 {% block content %}
+<main role="main" class="container-fluid">
     <h1>{{ ship.ship_name }}</h1>
     <h2>Ship Number: {{ ship.ship_num }}</h2>
     <p> Sank:
@@ -73,5 +74,5 @@
         </ul>
         </p>
     {% endif %}
-
+</main>
 {% endblock %}

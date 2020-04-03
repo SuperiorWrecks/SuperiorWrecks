@@ -39,7 +39,7 @@
         }
 
         .sidebar-right button:hover {
-            box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 9px 25px 0 rgba(0,0,0,0.19);
+            box-shadow: 0 6px 8px 0 rgba(0, 0, 0, 0.24), 0 9px 25px 0 rgba(0, 0, 0, 0.19);
         }
 
         .sidebar-right a:hover {
@@ -92,8 +92,14 @@
         var map;
         var markers = [];
         var ships = [];
-        {#var iconBase = "/static/img/";#}
-        var iconBase = "https://maps.google.com/mapfiles/kml/shapes/";
+
+        var bounds = {
+            north: 49.5,
+            south: 45.5,
+            west: -93.0,
+            east: -83.75,
+        };
+
         var icons = {
             blue: {
                 name: "2000+",
@@ -151,6 +157,10 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: 47.598154161430784, lng: -88.7},
                 zoom: 7,
+                restriction: {
+                    latLngBounds: bounds,
+                    strictBounds: false,
+                },
                 streetViewControl: false,
                 fullscreenControl: false,
                 mapTypeControl: false,
@@ -213,14 +223,14 @@
             var keyword = input.value.toUpperCase();
             var marks = markers;
 
-            for(var i = 0; i < markers.length; i++) {
+            for (var i = 0; i < markers.length; i++) {
                 loc = new google.maps.LatLng(markers[i].position.lat(), markers[i].position.lng());
-                if(markers[i]["name"].toUpperCase().indexOf(keyword) <= -1) {
+                if (markers[i]["name"].toUpperCase().indexOf(keyword) <= -1) {
                     markers[i].setMap(null);
                 } else {
                     markers[i].setMap(map);
                 }
-                if(markers[i]["name"].toUpperCase().localeCompare(keyword) === 0) {
+                if (markers[i]["name"].toUpperCase().localeCompare(keyword) === 0) {
                     markers[i]["infoWindow"].open(map, markers[i]);
                 } else {
                     markers[i]["infoWindow"].close();
@@ -247,8 +257,8 @@
             var year;
             var deaths;
 
-            for(var i = 0; i < ships.length; i++){
-                if(ships[i]["name"] === name){
+            for (var i = 0; i < ships.length; i++) {
+                if (ships[i]["name"] === name) {
                     latitude = ships[i]["latitude"];
                     longitude = ships[i]["longitude"];
                     year = ships[i]["year_sunk"];
@@ -256,7 +266,7 @@
                     num = ships[i]["num"];
                     break;
                 }
-             }
+            }
 
             var url_name = name.replace(/ /g, "_");
             var url_num = num.replace(/ /g, "_");
@@ -266,12 +276,12 @@
             var yearHTML;
             var deathsHTML;
 
-            if(year === null) {
+            if (year === null) {
                 yearHTML = " ";
             } else {
                 yearHTML = "<br>Year Sunk: " + year;
             }
-            if(deaths === null) {
+            if (deaths === null) {
                 deathsHTML = " ";
             } else {
                 deathsHTML = "<br>Deaths: " + deaths;
