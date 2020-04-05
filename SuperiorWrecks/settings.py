@@ -29,7 +29,6 @@ DEBUG = (os.getenv("PRODUCTION", "false") != "true")
 
 ALLOWED_HOSTS = ["superiorwrecks.epicwebsite.net", "127.0.0.1"]
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -73,7 +72,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'SuperiorWrecks.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
@@ -106,7 +104,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -120,8 +117,9 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# TEST_RUNNER = 'wrecks.tests.ManagedModelTestRunner'
