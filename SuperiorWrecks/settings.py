@@ -123,3 +123,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # TEST_RUNNER = 'wrecks.tests.ManagedModelTestRunner'
+
+# Social auth stuff -- sorry if it's wrong
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+LOGIN_URL = '/auth/login/google-oauth2/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
