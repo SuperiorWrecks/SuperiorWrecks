@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Berkshire+Swash&display=swap" rel="stylesheet">
     {# Universal Styles here #}
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
     {# Page specific styles as part of styles block #}
     {% block styles %}
     {% endblock %}
@@ -27,7 +28,7 @@
     <ul class="list-unstyled components">
         <li>
             <form class="bd-search d-flex align-items-center">
-                <input id="search" type="search" class="form-control ds-input" placeholder="Search for a Wreck" onkeyup="funct()">
+                <input id="search" type="search" class="form-control ds-input" placeholder="Search for a Wreck" onkeyup="funct(this.value.toUpperCase())">
             </form>
         </li>
         {% if page != "map" %}
@@ -67,7 +68,7 @@
 {# Scripts #}
 {% block scripts %}
     <script>
-    function funct() {
+    function funct(keyword) {
     }
     </script>
 {% endblock %}

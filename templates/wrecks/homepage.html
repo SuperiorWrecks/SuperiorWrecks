@@ -76,6 +76,8 @@
 {% block content %}
     <div id="map"></div>
     <div id="legend"><h3>Legend</h3></div>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
 {% endblock %}
 
 {% block noncontent %}
@@ -144,11 +146,9 @@
                 name: ship["name"],
                 infoWindow
             });
-            marker.addListener('mouseover', () => infoWindow.open(map, marker))
-            marker.addListener('click', () => showSidebar(marker))
-            marker.addListener('mouseout', () => infoWindow.close())
-
-            //TODO: Add onclick listener to pop out sidebar with more info
+            marker.addListener('mouseover', () => infoWindow.open(map, marker));
+            marker.addListener('click', () => showSidebar(marker));
+            marker.addListener('mouseout', () => infoWindow.close());
             markers.push(marker);
         }
 
@@ -218,12 +218,9 @@
 
         }
 
-        function funct() {
-            var input = document.getElementById("search");
-            var keyword = input.value.toUpperCase();
-            var marks = markers;
+        function funct(keyword) {
 
-            for (var i = 0; i < markers.length; i++) {
+            for(var i = 0; i < markers.length; i++) {
                 loc = new google.maps.LatLng(markers[i].position.lat(), markers[i].position.lng());
                 if (markers[i]["name"].toUpperCase().indexOf(keyword) <= -1) {
                     markers[i].setMap(null);
@@ -232,10 +229,12 @@
                 }
                 if (markers[i]["name"].toUpperCase().localeCompare(keyword) === 0) {
                     markers[i]["infoWindow"].open(map, markers[i]);
+                    return markers[i]["name"].toUpperCase();
                 } else {
                     markers[i]["infoWindow"].close();
                 }
             }
+            return "No match";
         }
 
         function showSidebar(marker) {
@@ -300,7 +299,23 @@
             map.style.width = "100%";
         }
     </script>
+    <script>
 
+    function test() {
+        QUnit.test("Search Test", function (assert) {
+            assert.expect(3);
+            var fixture = $("#qunit-fixture");
+            key = "ZILLAH";
+            assert.deepEqual(funct(key), "ZILLAH");
+
+            key = "EDMUND FITZGERALD";
+            assert.deepEqual(funct(key), "EDMUND FITZGERALD");
+
+            key = "EDMUND";
+            assert.deepEqual(funct(key), "No match");
+        });
+    }
+    </script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
             type="text/javascript"></script>
 {% endblock %}
