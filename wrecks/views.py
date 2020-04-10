@@ -11,6 +11,7 @@ from .models import Wrecks
 from .models import Photos
 from .models import Stories
 from .models import References
+from .models import Visit
 
 dotenv.load_dotenv(dotenv.find_dotenv())
 
@@ -63,12 +64,14 @@ def detail(request, name, num):
     photos = Photos.objects.filter(ship_name=name, ship_num=num).order_by('num')
     stories = Stories.objects.filter(ship_name=name, ship_num=num).order_by('num')
     references = References.objects.filter(ship_name=name, ship_num=num).order_by('num')
+    visit_wreck = Visit.objects.filter(ship_name=name, ship_num=num).order_by('num')
 
     context = {
         "ship": ship,
         "photos": photos,
         "stories": stories,
         "references": references,
+        "visit_wreck": visit_wreck,
         "page": "detail",
     }
     return render(request, 'wrecks/shipdetail.html', context)

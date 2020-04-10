@@ -65,6 +65,20 @@
         </p>
     {% endfor %}
 
+    {% if visit_wreck.exists %}
+        <p>
+            {% for text in visit_wreck %}
+                {{ text.how_to_visit }}
+            {% endfor %}
+            {% for item in visit_wreck %}
+                {% if item.url is not None %}
+                    <br>
+                    <a href="{{ item.url }}">Schedule a visit</a>
+                {% endif %}
+            {% endfor %}
+        </p>
+    {% endif %}
+
     {% if references.exists %}
         <p>References:
         <ul>
@@ -74,5 +88,8 @@
         </ul>
         </p>
     {% endif %}
+    <p style="color:transparent">
+        Some random text
+    </p>
 </main>
 {% endblock %}

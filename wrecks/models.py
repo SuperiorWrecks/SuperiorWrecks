@@ -24,6 +24,7 @@ class Wrecks(models.Model):
     deaths = models.IntegerField(blank=True, null=True)
     crew = models.IntegerField(blank=True, null=True)
     built_by = models.TextField(blank=True, null=True)
+    can_you_visit = models.BooleanField()
 
     class Meta:
         managed = False
@@ -77,6 +78,19 @@ class References(models.Model):
     class Meta:
         managed = False
         db_table = 'references'
+        unique_together = (('ship_name', 'ship_num', 'num'),)
+
+
+class Visit(models.Model):
+    ship_name = models.OneToOneField('Wrecks', models.DO_NOTHING, db_column='ship_name', primary_key=True)
+    ship_num = models.ForeignKey('Wrecks', models.DO_NOTHING, db_column='ship_num', related_name="+")
+    num = models.IntegerField()
+    url = models.TextField(blank=True, null=True)
+    how_to_visit = models.TextField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'visit_wreck'
         unique_together = (('ship_name', 'ship_num', 'num'),)
 
 
