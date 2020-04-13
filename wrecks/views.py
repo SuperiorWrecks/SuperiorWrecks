@@ -36,7 +36,7 @@ def listofships(request):
 def markers(request):
     data = []
     for ship in Wrecks.objects.all():
-        if (ship is not None and ship.latitude is not None and ship.longitude is not None):
+        if ship is not None and ship.latitude is not None and ship.longitude is not None:
             year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
             data.append(
                 {"name": ship.ship_name, "num": ship.ship_num, "latitude": float(ship.latitude),

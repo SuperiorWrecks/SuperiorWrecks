@@ -3,7 +3,7 @@
 #   * Rearrange models' order
 #   * Make sure each model has one field with primary_key=True
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
-#   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
+#   * Remove `managed = True` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
@@ -24,10 +24,10 @@ class Wrecks(models.Model):
     deaths = models.IntegerField(blank=True, null=True)
     crew = models.IntegerField(blank=True, null=True)
     built_by = models.TextField(blank=True, null=True)
-    can_you_visit = models.BooleanField()
+    can_you_visit = models.BooleanField(default=False)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'wrecks'
         unique_together = (('ship_name', 'ship_num'),)
 
@@ -38,7 +38,7 @@ class Cargo(models.Model):
     cargo_type = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'cargo'
 
 
@@ -50,7 +50,7 @@ class Path(models.Model):
     longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'path'
         unique_together = (('ship_num', 'ship_name', 'num'),)
 
@@ -63,7 +63,7 @@ class Photos(models.Model):
     photo = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'photos'
         unique_together = (('ship_name', 'ship_num'),)
 
@@ -76,7 +76,7 @@ class References(models.Model):
     text = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'references'
         unique_together = (('ship_name', 'ship_num', 'num'),)
 
@@ -89,7 +89,7 @@ class Visit(models.Model):
     how_to_visit = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'visit_wreck'
         unique_together = (('ship_name', 'ship_num', 'num'),)
 
@@ -101,6 +101,6 @@ class Stories(models.Model):
     content = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
+        managed = True
         db_table = 'stories'
         unique_together = (('ship_name', 'ship_num', 'num'),)

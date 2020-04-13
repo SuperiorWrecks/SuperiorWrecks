@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wrecks.apps.WrecksConfig'
+    'wrecks.apps.WrecksConfig',
+    # 'wrecks.models.models'
 ]
 
 MIDDLEWARE = [
@@ -83,6 +84,9 @@ DATABASES = {
         'PASSWORD': os.getenv("DATABASE_PASSWORD"),
         'HOST': os.getenv("DATABASE_HOST"),
         'PORT': '',
+        'TEST': {
+            "NAME": "superiorwrecks_test_db"
+        }
     }
 }
 
