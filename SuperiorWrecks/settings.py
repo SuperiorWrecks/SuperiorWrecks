@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'wrecks.apps.WrecksConfig',
-    # 'wrecks.models.models'
+    'social_django',
 ]
 
 MIDDLEWARE = [
