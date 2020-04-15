@@ -28,7 +28,7 @@
         {% if references.exists %}
             <p>References:
             <ul>
-                {% for reference in references %}
+                {% for url in references %}
                     <li><cite><a href="{{ reference.url }}">{{ reference.text }}</a></cite></li>
                 {% endfor %}
             </ul>
