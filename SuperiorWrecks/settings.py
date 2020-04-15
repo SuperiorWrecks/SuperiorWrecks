@@ -126,12 +126,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# TEST_RUNNER = 'wrecks.tests.ManagedModelTestRunner'
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
 
-# Social auth stuff -- sorry if it's wrong
-# SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = 'apps.googleusercontent.com'
-# SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = ''
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.getenv("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET")
+
+print("SOCIAL_AUTH_GOOGLE_OAUTH2_KEY:", SOCIAL_AUTH_GOOGLE_OAUTH2_KEY)
+print("SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET:", SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET)
 LOGIN_URL = '/auth/login/google-oauth2/'
+
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
 SOCIAL_AUTH_URL_NAMESPACE = 'social'

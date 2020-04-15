@@ -12,12 +12,17 @@
     top: 0;
     left: 0;
     position: fixed;
-    text-align: center;
     color: #1a1b3a;
     background-image: linear-gradient(white, #E5F6F6);
+    z-index: 4;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
     font-size: 40px;
     font-family: 'Berkshire Swash', cursive;
-    z-index: 4;
 }
 
 .sidebar-left {
@@ -33,13 +38,16 @@
 
 .sidebar-left a {
     padding: 6px 8px 6px 16px;
-    text-decoration: none;
     font-size: 22px;
+}
+
+.nav-link {
+    text-decoration: none;
     color: #1a1b3a;
     display: block;
 }
 
-.sidebar-left a:hover {
+.nav-link:hover {
     color: #3b3d80;
 }
 

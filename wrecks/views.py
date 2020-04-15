@@ -3,8 +3,9 @@ import dotenv
 import logging
 
 from django.http import Http404
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse
+from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Wrecks
@@ -75,3 +76,8 @@ def detail(request, name, num):
         "page": "detail",
     }
     return render(request, 'wrecks/shipdetail.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect(homepage)
