@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css?family=Baloo+Chettan+2|Berkshire+Swash&display=swap" rel="stylesheet">
     {# Universal Styles here #}
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
     {# Page specific styles as part of styles block #}
     {% block styles %}
     {% endblock %}
@@ -19,36 +20,56 @@
 <div id="background">
 </div>
 
+
 <div class="header">
-    <h1>Superior Wrecks</h1>
+    <h1 class="title">Superior Wrecks</h1>
+    <div class="navbar">
+        <ul class="nav navbar-nav ml-auto">
+            <li class="nav-item active">
+                {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'social:begin' 'google-oauth2' %}">
+                        Login
+                    </a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
 </div>
 {# Sidebar #}
 <nav class="sidebar-left">
     <ul class="list-unstyled components">
         <li>
             <form class="bd-search d-flex align-items-center">
-                <input id="search" type="search" class="form-control ds-input" placeholder="Search for a Wreck" onkeyup="funct()">
+                <input id="search" type="search" class="form-control ds-input" placeholder="Search for a Wreck"
+                       onkeyup="funct(this.value.toUpperCase())">
             </form>
         </li>
         {% if page != "map" %}
             <li>
-                <a href="/">Back to Map</a>
+                <a class="nav-link" href="/">Back to Map</a>
             </li>
         {% endif %}
         {% if page != "ships" %}
             <li>
-                <a href="/ships">List all Wrecks</a>
+                <a class="nav-link" href="/ships">List all Wrecks</a>
+            </li>
+        {% endif %}
+        {% if page != "detail" %}
+            <li>
+                <a class="nav-link" href="#">More Information</a>
+            </li>
+        {% endif %}
+        {% if page != "favorites" and user.is_authenticated %}
+            <li>
+                <a class="nav-link" href="#">Favorites</a>
             </li>
         {% endif %}
         <li>
-            <a href="#">More Information</a>
+            <a class="nav-link" href="#">Other Menu Items</a>
         </li>
-        <li>
-            <a href="#">Other Menu Items</a>
-        </li>
-        <li>
-            <a href="#">References</a>
-        </li>
+
     </ul>
 </nav>
 
@@ -70,8 +91,8 @@
 {# Scripts #}
 {% block scripts %}
     <script>
-    function funct() {
-    }
+        function funct(keyword) {
+        }
     </script>
 {% endblock %}
 
@@ -88,3 +109,4 @@
 
 </body>
 </html>
+

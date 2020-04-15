@@ -1,7 +1,12 @@
 # .coveragerc to control coverage.py
 [run]
 source = .
-omit = */node_modules/*
+omit =
+    */node_modules/*
+    #Django Generated files that we didn't modify:
+    manage.py
+    SuperiorWrecks/wsgi.py
+    SuperiorWrecks/asgi.py
 branch = True
 
 [report]

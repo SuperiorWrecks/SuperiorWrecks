@@ -37,8 +37,13 @@
             </tr>
             </thead>
         </table>
+    <div id="qunit-fixture"></div>
+    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js">
+
+    </script>
     </center>
 {% endblock %}
+
 
 {% block scripts %}
     <script>
@@ -70,27 +75,50 @@
             xmlhttp.send();
         }
 
-        function funct() {
-            var input = document.getElementById("search");
-            var keyword = input.value.toUpperCase();
+        function funct(keyword) {
             var table = document.getElementById("table");
             var tr = table.getElementsByTagName("tr");
 
+            console.log(tr.length);
+            console.log(keyword);
             // Loop through all table rows, and hide those who don't match the search query
             for (var i = 0; i < tr.length; i++) {
                 var td = tr[i].getElementsByTagName("td")[0];
                 var txtValue;
                 if (td) {
                     txtValue = td.textContent || td.innerText;
-                    if (txtValue.toUpperCase().indexOf(keyword) > -1) {
+                    txtValue = txtValue.toUpperCase();
+                    if (txtValue.indexOf(keyword) > -1) {
                         tr[i].style.display = "";
+                        if (txtValue.localeCompare(keyword) === 0) {
+                            return txtValue;
+                        }
                     } else {
                         tr[i].style.display = "none";
                     }
                 }
             }
+            return "No match";
         }
 
         init();
+
+        function test() {
+            var key;
+            QUnit.test( "Search Test", function( assert ) {
+                assert.expect(3);
+                key = "ZILLAH";
+                assert.deepEqual(funct(key), "ZILLAH");
+
+                key = "EDMUND FITZGERALD";
+                assert.deepEqual(funct(key), "EDMUND FITZGERALD");
+
+                key = "EDMUND";
+                assert.deepEqual(funct(key), "No match");
+            });
+        }
+
+
     </script>
+
 {% endblock %}

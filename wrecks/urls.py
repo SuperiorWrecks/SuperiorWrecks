@@ -8,4 +8,6 @@ urlpatterns = [
     path('ships/<str:name>/<str:num>/', views.detail, name='index'),
     path('wrecks/markers.json', views.markers, name='index'),
     path('wrecks/allShips.json', views.allShips, name='index'),
+    path('auth/logout/', views.logout_view, name='logout'),
+    path('favorite', views.changeFavorite),
 ]
