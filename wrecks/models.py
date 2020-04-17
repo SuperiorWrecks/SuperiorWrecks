@@ -115,13 +115,15 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     favorite_ships = models.ManyToManyField(Wrecks)
 
+
 class Trivia(models.Model):
-    question = models.TextField(blank=True, primary_key=True)
+    question = models.CharField(max_length=255)
     ans1 = models.TextField(blank=True, null=True)
     ans2 = models.TextField(blank=True, null=True)
     ans3 = models.TextField(blank=True, null=True)
     ans4 = models.TextField(blank=True, null=True)
     correct = models.IntegerField(blank=True, null=True)
+
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
