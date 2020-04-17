@@ -116,7 +116,7 @@ class Profile(models.Model):
     favorite_ships = models.ManyToManyField(Wrecks)
 
 class Trivia(models.Model):
-    question = models.TextField(blank=True, null=True, primary_key=True)
+    question = models.TextField(blank=True, primary_key=True)
     ans1 = models.TextField(blank=True, null=True)
     ans2 = models.TextField(blank=True, null=True)
     ans3 = models.TextField(blank=True, null=True)
