@@ -1,0 +1,29 @@
+{% extends "wrecks/template.html" %}
+
+{# I would like to apologize for the horror that is this code #}
+
+{% block title %}
+    <title>Trivia</title>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        #content {
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+
+        #content b {
+            font-family: "Berkshire Swash", cursive;
+            font-size: 22px;
+        }
+
+        #table {
+            height: 100%;
+            width: 75%;
+            margin-left: 5px;
+            margin-top: 12px;
+        }
+    </style>
+{% endblock %}
