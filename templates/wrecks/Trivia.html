@@ -27,3 +27,70 @@
         }
     </style>
 {% endblock %}
+
+{# Had to hard code in questions.  Working on a feature to only allow one button press per question. #}
+
+{% block content %}
+    <script>
+        var count = 0;
+        function questionCount(){
+            count = count + 1;
+        }
+        var questions = ["this is a test","this is also a test"];
+        var q1ans     = ["no","no","yes","no"];
+        var q2ans     = ["no","yes","no","no"];
+        var correct   = [3,2];
+    </script>
+    <center>
+        <h1>Trivia</h1>
+        
+        <h2>Question 1</h2>
+        <h3>How many times did the Edmund Fitzgerald sink?</h3>
+        <button id="b1" onclick="right(this.id)">1</button>
+        <button id="b2" onclick="wrong(this.id)">2</button>
+        <button id="b3" onclick="wrong(this.id)">3</button>
+        <button id="b4" onclick="wrong(this.id)">4</button>
+
+        <h2>Question 2</h2>
+        <h3>How many boats are named Roamer?</h3>
+        <button id="b5" onclick="wrong(this.id)">0</button>
+        <button id="b6" onclick="right(this.id)">2</button>
+        <button id="b7" onclick="wrong(this.id)">3</button>
+        <button id="b8" onclick="wrong(this.id)">14</button>
+
+        <h2>Question 3</h2>
+        <h3>How many ships have sunk in the portage?</h3>
+        <button id="b9" onclick="wrong(this.id)">1 ship</button>
+        <button id="b10" onclick="right(this.id)">2 ships</button>
+        <button id="b11" onclick="wrong(this.id)">5 ships</button>
+        <button id="b12" onclick="wrong(this.id)">0 ships</button>
+
+        <h2>Question 4</h2>
+        <h3>Which boat was the first to sink in lake Superior?</h3>
+        <button id="b13" onclick="right(this.id)">Recovery</button>
+        <button id="b14" onclick="wrong(this.id)">Starlight</button>
+        <button id="b15" onclick="wrong(this.id)">York</button>
+        <button id="b16" onclick="wrong(this.id)">Edmund Fitzgerald</button>
+
+        <h2>Question 5</h2>
+        <h3>What ship has the same name as a video game character?</h3>
+        <h4> a) Pacman b) Lady Link c) USS Mario d) S.R. Kirby</h4>
+        <button id="b17" onclick="wrong(this.id)">Pacman</button>
+        <button id="b18" onclick="wrong(this.id)">Lady Link</button>
+        <button id="b19" onclick="wrong(this.id)">USS Mario</button>
+        <button id="b20" onclick="right(this.id)">S.R. Kirby</button>
+    </center>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        var correct = 0;
+        function wrong(id) {
+            document.getElementById(id).innerHTML = "incorrect";
+        }
+        function right(id) {
+            correct = correct + 1;
+            document.getElementById(id).innerHTML = "correct!";
+        }
+    </script>
+{% endblock %}
