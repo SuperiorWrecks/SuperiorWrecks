@@ -3,11 +3,11 @@ import dotenv
 import logging
 
 import django.views.defaults
-from django.http import Http404
+from django.http import Http404, JsonResponse, HttpResponse
 from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponse
 from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
+from django.urls import reverse
 
 from .models import Wrecks
 from .models import Photos
@@ -32,7 +32,16 @@ def homepage(request):
 
 def listofships(request):
     context = {
-        "page": "ships"
+        "page": "ships",
+        "url": reverse(allShips),
+    }
+    return render(request, 'wrecks/listofships.html', context)
+
+
+def listoffavs(request):
+    context = {
+        "page": "favorites",
+        "url": reverse(favShips),
     }
     return render(request, 'wrecks/listofships.html', context)
 
@@ -51,6 +60,20 @@ def markers(request):
 def allShips(request):
     data = []
     for ship in Wrecks.objects.all():
+        year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
+        entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year}
+        data.append(entry)
+    return JsonResponse(data, safe=False)
+
+
+def favShips(request):
+    if (not request.user.is_authenticated):
+        return HttpResponse(403)
+
+    user = User.objects.get(id=request.user.id)
+
+    data = []
+    for ship in user.profile.favorite_ships.all():
         year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
         entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year}
         data.append(entry)
