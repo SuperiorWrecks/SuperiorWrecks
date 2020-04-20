@@ -215,10 +215,12 @@
                 if (this.readyState === 4 && this.status === 200) {
                     ships = JSON.parse(this.responseText);
                     ships.forEach(addMarker);
+                    var markerCluster = new MarkerClusterer(map, markers, {imagePath: "/static/img/m"});
                 }
             };
             xmlhttp.open("GET", "/wrecks/markers.json", true);
             xmlhttp.send();
+
 
         }
 
@@ -322,4 +324,5 @@
     </script>
     <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
             type="text/javascript"></script>
+    <script src="/static/js/clustering.js"></script>
 {% endblock %}
