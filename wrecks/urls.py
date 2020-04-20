@@ -12,4 +12,5 @@ urlpatterns = [
     path('wrecks/favShips.json', views.favShips, name='index'),
     path('auth/logout/', views.logout_view, name='logout'),
     path('favorite', views.changeFavorite),
+    path('trivia/', views.trivia, name='index'),
 ]
