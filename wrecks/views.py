@@ -45,6 +45,13 @@ def listoffavs(request):
     }
     return render(request, 'wrecks/listofships.html', context)
 
+def references(request):
+    context = {
+        "page": "references",
+        "url": reverse(references),
+    }
+    return render(request, 'wrecks/references.html', context)
+
 
 def trivia(request):
     context = {
