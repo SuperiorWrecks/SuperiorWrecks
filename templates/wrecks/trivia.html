@@ -28,10 +28,10 @@
 
         #submit{
 	        font-family: "Berkshire Swash";
-	        font-size: 20px;
-	        background-color: #297;
+	        font-size: 15px;
+	        background-color: #1a1b3a;
 	        color: #fff;
-	        border: 0px;
+	        border: 5px;
 	        border-radius: 3px;
 	        padding: 2px;
 	        cursor: pointer;
@@ -39,7 +39,7 @@
         }
 
         #submit:hover{
-	        background-color: #3a8;
+	        background-color: #3b3d80;
         }
     </style>
 {% endblock %}
@@ -48,43 +48,6 @@
 
 {% block content %}
     <center>
-        <!--<h1>Trivia</h1>
-
-        <h2>Question 1</h2>
-        <h3>How many times did the Edmund Fitzgerald sink?</h3>
-        <button id="b1" onclick="right(this.id)">1</button>
-        <button id="b2" onclick="wrong(this.id)">2</button>
-        <button id="b3" onclick="wrong(this.id)" aria-disabled = Q1>3</button>
-        <button id="b4" onclick="wrong(this.id)">4</button>
-
-        <h2>Question 2</h2>
-        <h3>How many boats are named Roamer?</h3>
-        <button id="b5" onclick="wrong(this.id)">0</button>
-        <button id="b6" onclick="right(this.id)">2</button>
-        <button id="b7" onclick="wrong(this.id)">3</button>
-        <button id="b8" onclick="wrong(this.id)">14</button>
-
-        <h2>Question 3</h2>
-        <h3>How many ships have sunk in the portage?</h3>
-        <button id="b9" onclick="wrong(this.id)">1 ship</button>
-        <button id="b10" onclick="right(this.id)">2 ships</button>
-        <button id="b11" onclick="wrong(this.id)">5 ships</button>
-        <button id="b12" onclick="wrong(this.id)">0 ships</button>
-
-        <h2>Question 4</h2>
-        <h3>Which boat was the first to sink in lake Superior?</h3>
-        <button id="b13" onclick="right(this.id)">Recovery</button>
-        <button id="b14" onclick="wrong(this.id)">Starlight</button>
-        <button id="b15" onclick="wrong(this.id)">York</button>
-        <button id="b16" onclick="wrong(this.id)">Edmund Fitzgerald</button>
-
-        <h2>Question 5</h2>
-        <h3>What ship has the same name as a video game character?</h3>
-        <button id="b17" onclick="wrong(this.id)">Pacman</button>
-        <button id="b18" onclick="wrong(this.id)">Lady Link</button>
-        <button id="b19" onclick="wrong(this.id)">USS Mario</button>
-        <button id="b20" onclick="right(this.id)">S.R. Kirby</button> -->
-
         <div id="quiz"></div>
         <button id="submit">Get Results</button>
         <div id="results"></div>
@@ -104,7 +67,7 @@
                     d: 'S.R. Kirby'
 		        },
 		            correctAnswer: 'd'
-	            },
+            },
             {
                 question: "Which boat was the first to sink in lake Superior?",
                 answers: {
@@ -114,7 +77,27 @@
                     d: 'Edmund Fitzgerald'
                 },
 		            correctAnswer: 'a'
-            }
+            },
+            {
+		        question: "How many ships are named Roamer that have sunk?",
+		        answers: {
+		            a: '2 ships',
+			        b: '9 ships',
+			        c: '1 ships',
+                    d: '0 ships'
+		        },
+		            correctAnswer: 'a'
+            },
+            {
+		        question: "How many ships have sunken in the portage?",
+		        answers: {
+		            a: '0 ships',
+			        b: '5 ships',
+			        c: '2 ships',
+                    d: '10 ships'
+		        },
+		            correctAnswer: 'c'
+            },
         ];
 
         function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
@@ -175,46 +158,5 @@
         var submitButton = document.getElementById('submit');
 
         generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
-
-
-        /**var correct = 0;
-        var Q1 = false;
-        var Q2 = false;
-        var Q3 = false;
-        var Q4 = false;
-        var Q5 = false;
-        function disable(id){
-            if(id==="b1" || id.isEqualNode("b2") || id.isEqualNode("b3") || id.isEqualNode("b4")){
-                Q1 = true;
-                "b2".disabled();
-            }
-            if(id.isEqualNode("b5") || id.isEqualNode("b6") || id.isEqualNode("b7") || id.isEqualNode("b8")){
-                Q2 = true;
-
-            }
-            if(id.isEqualNode("b11") || id.isEqualNode("b12") || id.isEqualNode("b10") || id.isEqualNode("b9")){
-                Q3 = true;
-
-            }
-            if(id.isEqualNode("b13") || id.isEqualNode("b14") || id.isEqualNode("b15") || id.isEqualNode("b16")){
-                Q4 = true;
-
-            }
-            if(id.isEqualNode("b17") || id.isEqualNode("b18") || id.isEqualNode("b19") || id.isEqualNode("b20")){
-                Q5 = true;
-
-            }
-        }
-        function wrong(id) {
-                document.getElementById(id).innerHTML = "incorrect";
-                disable(id);
-
-        }
-        function right(id) {
-                document.getElementById(id).innerHTML = "correct!";
-                correct = correct + 1;
-                disable(id);
-        }
-    **/
     </script>
 {% endblock %}
