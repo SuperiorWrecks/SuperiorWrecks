@@ -71,9 +71,11 @@
                 <a class="nav-link" href="/trivia">Trivia</a>
             </li>
         {% endif %}  {# steph end #}
-        <li>
-            <a class="nav-link" href="#">References</a>
-        </li>
+        {% if page != "references" %}
+            <li>
+                <a class="nav-link" href="/references">references</a>
+            </li>
+        {% endif %}
 
     </ul>
 </nav>
