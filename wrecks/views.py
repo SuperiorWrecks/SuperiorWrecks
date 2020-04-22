@@ -45,13 +45,16 @@ def listoffavs(request):
     }
     return render(request, 'wrecks/listofships.html', context)
 
+
 def trivia(request):
     context = {
         "page": "trivia",
-        "url": reverse(trivia),
+        "url": reverse(revTrivia),
     }
-    return render(request, 'wrecks/Trivia.html', context)
+    return render(request, 'wrecks/trivia.html', context)
 
+def revTrivia(request):
+    return JsonResponse(safe=False)
 
 def markers(request):
     data = []
