@@ -21,16 +21,7 @@
 {% block content %}
 
         <p style="color: #1a1b3a">
-
-                {% if references.exists %}
-            <p>References:
-            <ul>
-                {% for reference in references %}
-                    <li><cite><a href="{{ reference.url }}">{{ reference.text }}</a></cite></li>
-                {% endfor %}
-            </ul>
-            </p>
-        {% endif %}
+        References
 
         </p>
     </main>
