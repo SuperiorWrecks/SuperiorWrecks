@@ -56,12 +56,8 @@ def references(request):
 def trivia(request):
     context = {
         "page": "trivia",
-        "url": reverse(revTrivia),
     }
     return render(request, 'wrecks/trivia.html', context)
-
-def revTrivia(request):
-    return JsonResponse(safe=False)
 
 def markers(request):
     data = []
