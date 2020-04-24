@@ -45,11 +45,20 @@ def listoffavs(request):
     }
     return render(request, 'wrecks/listofships.html', context)
 
+
 def references(request):
+    data = []
+    for refern in References.objects.all():
+        if refern is not None:
+            ref = {"url": refern.url}
+            data.append(ref)
+            return JsonResponse(ref)
+
     context = {
         "page": "references",
-        "url": reverse(references),
+        "references": refern,
     }
+
     return render(request, 'wrecks/references.html', context)
 
 
@@ -58,6 +67,7 @@ def trivia(request):
         "page": "trivia",
     }
     return render(request, 'wrecks/trivia.html', context)
+
 
 def markers(request):
     data = []

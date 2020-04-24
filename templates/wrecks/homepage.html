@@ -46,6 +46,19 @@
             color: #3b3d80;
         }
 
+        .legend button{
+            font-family: "Berkshire Swash", serif;
+	        font-size: 15px;
+	        background-color: #1a1b3a;
+	        color: #fff;
+	        border: 5px;
+	        border-radius: 3px;
+	        padding: 2px;
+	        cursor: pointer;
+	        margin-bottom: 20px;
+            margin-left: 230px;
+        }
+
         #legend {
             background: #d0f0f0;
             padding: 10px;
@@ -87,6 +100,13 @@
         Basic info about the ship
         <a href="#">Click for more details</a>
     </div>
+    <div class="legend"><button1>
+        <button type="button" onclick="hideIconBlue()">Hide Blue Ships </button>
+        <button type="button" onclick="hideIconRed()">Hide Red Ships </button>
+        <button type="button" onclick="hideIconGreen()">Hide Green Ships </button>
+        <button type="button" onclick="hideIconBlack()">Hide Black Ships </button>
+    </button1>
+    </div>
 {% endblock %}
 
 {% block scripts %}
@@ -103,6 +123,7 @@
             west: -94,
             east: -83.25,
         };
+
 
         var icons = {
             blue: {
@@ -122,6 +143,7 @@
                 icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Gfi-set01-lost-ship.svg/32px-Gfi-set01-lost-ship.svg.png"
             }
         };
+
 
         function addMarker(ship) {
             var contentString = "<h4>" + ship["name"] + "</h4><p>Ship Number: " + ship["num"] + "</p>";
@@ -168,6 +190,7 @@
                 mapTypeControl: false,
             });
 
+
             var legend = document.getElementById('legend');
             for (var key in icons) {
                 var type = icons[key];
@@ -178,35 +201,7 @@
                 legend.appendChild(div);
             }
 
-            //type.icon
 
-        //<button onclick= "hideIcon()"> Icons
-          /*  var filterYears = // get data value;
-            legend.type.select("icon")
-            .on("click", function (e){
-
-                var hideIcon = false;
-                var newFilter = [];
-
-                //if filter has clicked icon, hide it
-                filterYears.forEach(function (f){
-                    if (f === e.slice(-1)[0]){
-                        hideIcon = true;
-                    } else {
-                        newFilter.push(f);
-                    }
-                });
-                //hiding shape
-                if(hideIcon) {
-                    if(icons.blue){
-
-                    }
-
-                } else {
-
-                }
-
-            });*/
 
 
             map.controls[google.maps.ControlPosition.LEFT_BOTTOM].push(legend);
@@ -316,6 +311,7 @@
             x[0].style.display = "none";
             map.style.width = "100%";
         }
+
     </script>
     <script>
 
@@ -334,6 +330,38 @@
         });
     }
     </script>
+
+    <script>
+
+    function hideIconBlue() {
+        var hideship = true;
+        if (hideship = false){
+            hideship = true;
+        } else if(hideship = true) {
+            icon.blue.style.visibility = "hidden";
+            hideship = false;
+        }
+    }
+        //let hideship = true;
+
+      /*function hideIconRed() {
+
+
+          /*var redship = document.getElementsByName("1899 and before");
+            var map = document.getElementById("map");
+            redship[0].style.display = "none";
+            map.style.width = "100%";*/
+
+
+        /*for (var i = 0; i < markers[type].length; i++) {
+            var mark = markers[type][i];
+            if (!mark.getVisible()) {
+            mark.setVisible(true);
+            } else {
+            mark.setVisible(false);*/
+
+    </script>
+
     <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
             type="text/javascript"></script>
     <script src="/static/js/clustering.js"></script>

@@ -11,20 +11,28 @@
             z-index: 1;
         }
 
-        #content b {
+        #content c {
             font-family: "Berkshire Swash", cursive;
-            font-size: 22px;
+            font-size: 30px;
         }
+
     </style>
 {% endblock %}
 
+{% block noncontent%}
+<div id="content"><c>References</c></div>
+{% endblock %}
+
 {% block content %}
-
-        <p style="color: #1a1b3a">
-        References
-
-        </p>
-    </main>
+        {% if refern.exists %}
+            <p>
+            <ul>
+                {% for reference in refern %}
+                    <li><cite><a href="{{ reference.url }}">{{ reference.text }}</a></cite></li>
+                {% endfor %}
+            </ul>
+            </p>
+        {% endif %}
 {% endblock %}
 
 
