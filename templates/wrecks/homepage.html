@@ -123,20 +123,18 @@
     </style>
 {% endblock %}
 
-{% block button-content %}
-    <li>
-        <button id="but2" type="button" onclick="hideIconRed()">Hide Red Ships</button>
-        <button id="but3" type="button" onclick="hideIconBlue()">Hide Blue Ships</button>
-        <button id="but4" type="button" onclick="hideIconGreen()">Hide Green Ships</button>
-        <button id="but5" type="button" onclick="hideIconBlack()">Hide Purple Ships</button>
-    </li>
-{% endblock button-content %}
+{#{% block button-content %}#}
+{#    <li>#}
+{#        <button id="but2" type="button" onclick="hideIconRed()">Hide Red Ships</button>#}
+{#        <button id="but3" type="button" onclick="hideIconBlue()">Hide Blue Ships</button>#}
+{#        <button id="but4" type="button" onclick="hideIconGreen()">Hide Green Ships</button>#}
+{#        <button id="but5" type="button" onclick="hideIconBlack()">Hide Purple Ships</button>#}
+{#    </li>#}
+{#{% endblock button-content %}#}
 
 {% block content %}
     <div id="map"></div>
     <div id="legend"><h3>Legend</h3></div>
-    <div id="qunit-fixture"></div>
-    <script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
 {% endblock %}
 
 {% block noncontent %}
@@ -375,7 +373,7 @@
             //Format the side bar
             x[0].innerHTML = buttonHTML + "Ship Number: " + num + "<br>Latitude: " + latitude + "<br>Longitude: " +
                 longitude + yearHTML + deathsHTML + urlHTML;
-
+            return num + deaths;
         }
 
         function hideSidebar() {
@@ -384,26 +382,6 @@
             x[0].style.display = "none";
             map.style.width = "100%";
         }
-
-
-
-    </script>
-    <script>
-
-    function test() {
-        QUnit.test("Search Test", function (assert) {
-            assert.expect(3);
-            var fixture = $("#qunit-fixture");
-            key = "ZILLAH";
-            assert.deepEqual(funct(key), "ZILLAH");
-
-            key = "EDMUND FITZGERALD";
-            assert.deepEqual(funct(key), "EDMUND FITZGERALD");
-
-            key = "EDMUND";
-            assert.deepEqual(funct(key), "No match");
-        });
-    }
     </script>
 
 
