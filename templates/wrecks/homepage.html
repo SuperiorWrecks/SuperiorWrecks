@@ -46,18 +46,6 @@
             color: #3b3d80;
         }
 
-        .legend button{
-            font-family: "Berkshire Swash", serif;
-	        font-size: 15px;
-	        background-color: #1a1b3a;
-	        color: #fff;
-	        border: 5px;
-	        border-radius: 3px;
-	        padding: 2px;
-	        cursor: pointer;
-	        margin-bottom: 20px;
-            margin-left: 230px;
-        }
 
         #legend {
             background: #d0f0f0;
@@ -83,6 +71,47 @@
             height: 100%;
             width: 100%;
         }
+
+        #but2{
+	        font-family: "Berkshire Swash";
+	        font-size: 15px;
+	        background-color: crimson;
+	        color: #fff;
+	        border: 5px;
+	        border-radius: 3px;
+	        padding: 2px;
+	        cursor: pointer;
+        }
+        #but3{
+	        font-family: "Berkshire Swash";
+	        font-size: 15px;
+	        background-color: blue;
+	        color: #fff;
+	        border: 5px;
+	        border-radius: 3px;
+	        padding: 2px;
+	        cursor: pointer;
+        }
+        #but4{
+	        font-family: "Berkshire Swash";
+	        font-size: 15px;
+	        background-color: forestgreen;
+	        color: #fff;
+	        border: 5px;
+	        border-radius: 3px;
+	        padding: 2px;
+	        cursor: pointer;
+        }
+        #but5{
+	        font-family: "Berkshire Swash";
+	        font-size: 15px;
+	        background-color: black;
+	        color: #fff;
+	        border: 5px;
+	        border-radius: 3px;
+	        padding: 2px;
+	        cursor: pointer;
+        }
     </style>
 {% endblock %}
 
@@ -100,18 +129,12 @@
         Basic info about the ship
         <a href="#">Click for more details</a>
     </div>
-    <div class="legend"><button1>
-        <button type="button" onclick="hideIconBlue()">Hide Blue Ships </button>
-        <button type="button" onclick="hideIconRed()">Hide Red Ships </button>
-        <button type="button" onclick="hideIconGreen()">Hide Green Ships </button>
-        <button type="button" onclick="hideIconBlack()">Hide Black Ships </button>
-    </button1>
-    </div>
 {% endblock %}
 
 {% block scripts %}
     <script>
-        var map;
+
+    var map;
         var markerCluster;
         var markers = [];
         var clusterMarkers = [];
@@ -127,22 +150,23 @@
 
         var icons = {
             blue: {
-                name: "2000+",
+                name: "2000+    ",
                 icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Gfi-set01-lost-ship_-00f.svg/32px-Gfi-set01-lost-ship_-00f.svg.png"
             },
             green: {
-                name: "1900-1999",
+                name: "1900-1999    ",
                 icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Gfi-set01-lost-ship_-080.svg/32px-Gfi-set01-lost-ship_-080.svg.png"
             },
             red: {
-                name: "1899 and before",
+                name: "1899 and before  ",
                 icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Gfi-set01-lost-ship_-f00.svg/32px-Gfi-set01-lost-ship_-f00.svg.png"
             },
             black: {
-                name: "Unknown",
+                name: "Unknown  ",
                 icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/Gfi-set01-lost-ship.svg/32px-Gfi-set01-lost-ship.svg.png"
             }
         };
+
 
 
         function addMarker(ship) {
@@ -163,6 +187,8 @@
                 icon = icons.blue.icon;
             }
 
+
+
             var marker = new google.maps.Marker({
                 position: {lat: ship["latitude"], lng: ship["longitude"]},
                 icon: icon,
@@ -173,9 +199,24 @@
             marker.addListener('mouseover', () => infoWindow.open(map, marker));
             marker.addListener('click', () => showSidebar(marker));
             marker.addListener('mouseout', () => infoWindow.close());
+            marker.addListener('',() => hideIconRed(marker));
+            //marker.addListener('')
             markers.push(marker);
-        }
 
+
+        }
+        function hideIconRed(marker){
+                marker.display = "none";
+            };
+        function hideIconBlue(marker){
+                marker.display = "none";
+            };
+        function hideIconGreen(marker){
+                marker.display = "none";
+            };
+        function hideIconBlack(marker){
+                marker.display = "none";
+            };
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -196,8 +237,9 @@
                 var type = icons[key];
                 var name = type.name;
                 var icon = type.icon;
+                var button = type.button;
                 var div = document.createElement('div');
-                div.innerHTML = '<img src="' + icon + '"> ' + name;
+                div.innerHTML = '<img src="' + icon + '"> ' + name + button;
                 legend.appendChild(div);
             }
 
@@ -312,6 +354,8 @@
             map.style.width = "100%";
         }
 
+
+
     </script>
     <script>
 
@@ -331,36 +375,6 @@
     }
     </script>
 
-    <script>
-
-    function hideIconBlue() {
-        var hideship = true;
-        if (hideship = false){
-            hideship = true;
-        } else if(hideship = true) {
-            icon.blue.style.visibility = "hidden";
-            hideship = false;
-        }
-    }
-        //let hideship = true;
-
-      /*function hideIconRed() {
-
-
-          /*var redship = document.getElementsByName("1899 and before");
-            var map = document.getElementById("map");
-            redship[0].style.display = "none";
-            map.style.width = "100%";*/
-
-
-        /*for (var i = 0; i < markers[type].length; i++) {
-            var mark = markers[type][i];
-            if (!mark.getVisible()) {
-            mark.setVisible(true);
-            } else {
-            mark.setVisible(false);*/
-
-    </script>
 
     <script defer src="https://maps.googleapis.com/maps/api/js?key={{ GOOGLE_API_KEY }}&callback=initMap"
             type="text/javascript"></script>

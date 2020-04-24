@@ -74,6 +74,14 @@
         <li>
             <a class="nav-link {% if request.resolver_match.url_name == "references" %}active{% endif %}" href="{% url "references" %}">References</a>
         </li>
+        <li>
+        </li>
+        <li>
+            <button id="but2" type="button" onclick="hideIconRed()">Hide Red Ships</button>
+            <button id="but3" type="button" onclick="hideIconBlue()">Hide Blue Ships</button>
+            <button id="but4" type="button" onclick="hideIconGreen()">Hide Green Ships</button>
+            <button id="but5" type="button" onclick="hideIconBlack()">Hide Black Ships</button>
+        </li>
     </ul>
 </nav>
 
