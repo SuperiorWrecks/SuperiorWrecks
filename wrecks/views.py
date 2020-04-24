@@ -47,6 +47,17 @@ def trivia(request):
 
 
 def references(request):
+    data = []
+    for refern in References.objects.all():
+        if refern is not None:
+            ref = {"url": refern.url}
+            data.append(ref)
+            return JsonResponse(ref)
+
+    content = {
+        "references": refern,
+    }
+
     return render(request, 'wrecks/references.html')
 
 
