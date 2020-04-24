@@ -92,7 +92,9 @@
 {% block scripts %}
     <script>
         var map;
+        var markerCluster;
         var markers = [];
+        var clusterMarkers = [];
         var ships = [];
 
         var bounds = {
@@ -215,7 +217,10 @@
                 if (this.readyState === 4 && this.status === 200) {
                     ships = JSON.parse(this.responseText);
                     ships.forEach(addMarker);
-                    var markerCluster = new MarkerClusterer(map, markers, {imagePath: "/static/img/m"});
+                    for(var i = 0; i < markers.length; i++) {
+                        clusterMarkers[i] = markers[i];
+                    }
+                    markerCluster = new MarkerClusterer(map, clusterMarkers, {imagePath: "/static/img/m"});
                 }
             };
             xmlhttp.open("GET", "/wrecks/markers.json", true);
@@ -225,13 +230,19 @@
         }
 
         function funct(keyword) {
-
+            markerCluster.clearMarkers();
+            for(var i = 0; i < clusterMarkers.length; i++) {
+                clusterMarkers[i] = null;
+            }
+            var k = 0;
             for(var i = 0; i < markers.length; i++) {
                 loc = new google.maps.LatLng(markers[i].position.lat(), markers[i].position.lng());
                 if (markers[i]["name"].toUpperCase().indexOf(keyword) <= -1) {
                     markers[i].setMap(null);
                 } else {
                     markers[i].setMap(map);
+                    clusterMarkers[k] = markers[i];
+                    k++;
                 }
                 if (markers[i]["name"].toUpperCase().localeCompare(keyword) === 0) {
                     markers[i]["infoWindow"].open(map, markers[i]);
@@ -240,6 +251,7 @@
                     markers[i]["infoWindow"].close();
                 }
             }
+            markerCluster = new MarkerClusterer(map, clusterMarkers, {imagePath: "/static/img/m"});
             return "No match";
         }
 

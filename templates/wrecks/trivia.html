@@ -15,16 +15,25 @@
 
         #content b {
             font-family: "Berkshire Swash", cursive;
-            font-size: 22px;
+            font-size: 50px;
         }
 
         .question{
 	        font-weight: 600;
+            padding-bottom: 20px;
+            padding-left: 100px;
         }
 
         .answers {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
+            padding-left: 100px;
         }
+
+        #img{
+            padding-right: 100px;
+        }
+
+
 
         #submit{
 	        font-family: "Berkshire Swash";
@@ -36,6 +45,7 @@
 	        padding: 2px;
 	        cursor: pointer;
 	        margin-bottom: 20px;
+            margin-left: 230px;
         }
 
         #submit:hover{
@@ -44,14 +54,14 @@
     </style>
 {% endblock %}
 
-{# Had to hard code in questions.  Working on a feature to only allow one button press per question. #}
-
 {% block content %}
-    <center>
+    <p>
+        <img id="img"  src="static/img/Edmund_Fitzgerald_Wiki.jpg" alt="The Edmund Fitzgerald"
+             style="width:500px;height:600px;float:right">
         <div id="quiz"></div>
         <button id="submit">Get Results</button>
         <div id="results"></div>
-    </center>
+    </p>
 {% endblock %}
 
 {% block scripts %}
@@ -97,6 +107,28 @@
 		        },
 		            correctAnswer: 'c'
             },
+            {
+		        question: "Which ship crashed in the Thunder Bay area?",
+		        answers: {
+		            a: 'York',
+			        b: 'Sarina',
+			        c: 'Edmund Fitzgerald',
+                    d: 'Varada'
+		        },
+		            correctAnswer: 'b'
+            },
+            {
+		        question: "What ship crashed near Houghton?",
+		        answers: {
+		            a: 'Amboy',
+			        b: 'Sagamore',
+			        c: 'Roanoke',
+                    d: 'Sailor Boy'
+		        },
+		            correctAnswer: 'd'
+            },
+
+
         ];
 
         function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
@@ -127,6 +159,7 @@
 
 	        function showResults(questions, quizContainer, resultsContainer){
                 var answerContainers = quizContainer.querySelectorAll('.answers');
+                var questCon = quizContainer.querySelectorAll('.question');
 	            var userAnswer = '';
 	            var numCorrect = 0;
 
@@ -134,15 +167,15 @@
 		            userAnswer = (answerContainers[i].querySelector('input[name=question'+i+']:checked')||{}).value;
 		            if(userAnswer===questions[i].correctAnswer){
 			            numCorrect++;
-			            answerContainers[i].style.color = 'lightgreen';
+			            questCon[i].style.color = 'limegreen';
 		            }
 		            else{
-			            answerContainers[i].style.color = 'red';
+			            questCon[i].style.color = 'red';
 		            }
 	        }
 
 	// show number of correct answers out of total
-	resultsContainer.innerHTML = numCorrect + ' out of ' + questions.length;
+	resultsContainer.innerHTML = 'Score' + numCorrect + '/' + questions.length;
 	}
 
 	        showQuestions(questions, quizContainer);
