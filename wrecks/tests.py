@@ -39,7 +39,7 @@ class TestShipListView(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse(views.listofships))
+        response = self.client.get(reverse(views.list_of_ships))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'wrecks/template.html')
         self.assertTemplateUsed(response, 'wrecks/listofships.html')
@@ -127,13 +127,13 @@ class TestAllShipsView(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_view_uses_correct_template(self):
-        response = self.client.get(reverse(views.allShips))
+        response = self.client.get(reverse(views.all_ships))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateNotUsed(response, 'wrecks/*.html')
 
     def test_lists_all_markers(self):
         # Get json and confirm it has (exactly) 17 items
-        response = self.client.get(reverse(views.allShips))
+        response = self.client.get(reverse(views.all_ships))
         self.assertEqual(response.status_code, 200)
         j = json.loads(response.content.decode('utf-8'))
         self.assertTrue(len(j) == self.NUMBER_OF_SHIPS)

@@ -12,11 +12,11 @@
     <link rel="stylesheet" type="text/css" href="/static/css/main.css">
     <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
     {# Favicon code #}
-    <link rel="apple-touch-icon" sizes="180x180" href="/wrecks/static/favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/wrecks/static/favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/wrecks/static/favicon/favicon-16x16.png">
-    <link rel="manifest" href="/wrecks/static/favicon/site.webmanifest">
-    <link rel="mask-icon" href="/wrecks/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="apple-touch-icon" sizes="180x180" href="/static/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/static/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/static/favicon/favicon-16x16.png">
+    <link rel="manifest" href="/static/favicon/site.webmanifest">
+    <link rel="mask-icon" href="/static/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#2b5797">
     <meta name="theme-color" content="#ffffff">
     {# Page specific styles as part of styles block #}
@@ -54,38 +54,26 @@
                        onkeyup="funct(this.value.toUpperCase())">
             </form>
         </li>
-        {% if page != "map" %}
+{#        <li class="{% if request.resolver_match.url_name == "my_view_name" %}active{% endif %}">#}
+{#            <a href="{% url "my_view_name" %}">Shortcut1</a>#}
+{#        </li>#}
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "map" %}active{% endif %}" href="{% url "map" %}">Map</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "ships" %}active{% endif %}" href="{% url "ships" %}">List All Wrecks</a>
+        </li>
+        {% if user.is_authenticated %}
             <li>
-                <a class="nav-link" href="/">Back to Map</a>
+            <a class="nav-link {% if request.resolver_match.url_name == "favs" %}active{% endif %}" href="{% url "favs" %}">Favorites</a>
             </li>
         {% endif %}
-        {% if page != "ships" %}
-            <li>
-                <a class="nav-link" href="/ships">List all Wrecks</a>
-            </li>
-        {% endif %}
-        {% if page != "detail" %}
-            <li>
-                <a class="nav-link" href="#">More Information</a>
-            </li>
-        {% endif %}
-        {% if page != "favorites" and user.is_authenticated %}
-            <li>
-                <a class="nav-link" href="/favorites">Favorites</a>
-            </li>
-        {% endif %}
-        {% if page != "trivia" %} {# Stephanie start #}
-            <li>
-                <a class="nav-link" href="/trivia">Trivia</a>
-            </li>
-        {% endif %}  {# steph end #}
-        {% if page != "references" %}
-            <li>
-                <a class="nav-link" href="/references">references</a>
-            </li>
-        {% endif %}
-
-
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "trivia" %}active{% endif %}" href="{% url "trivia" %}">Trivia</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "references" %}active{% endif %}" href="{% url "references" %}">References</a>
+        </li>
     </ul>
 </nav>
 

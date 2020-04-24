@@ -3,16 +3,16 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.homepage, name='index'),
-    path('ships/', views.listofships, name='index'),
-    path('favorites/', views.listoffavs, name='index'),
-    path('ships/<str:name>/<str:num>/', views.detail, name='index'),
-    path('wrecks/markers.json', views.markers, name='index'),
-    path('wrecks/allShips.json', views.allShips, name='index'),
-    path('wrecks/favShips.json', views.favShips, name='index'),
+    path('', views.homepage, name='map'),
+    path('ships/', views.list_of_ships, name='ships'),
+    path('favorites/', views.list_of_favs, name='favs'),
+    path('ships/<str:name>/<str:num>/', views.detail, name='detail'),
+    path('wrecks/markers.json', views.markers, name='markers'),
+    path('wrecks/allShips.json', views.all_ships, name='allShips'),
+    path('wrecks/favShips.json', views.fav_ships, name='favShips'),
     path('auth/logout/', views.logout_view, name='logout'),
-    path('favorite', views.changeFavorite),
-    path('trivia/', views.trivia, name='index'),
-    path('references/', views.references, name='index'),
+    path('favorite', views.toggle_favorite),
+    path('trivia/', views.trivia, name='trivia'),
+    path('references/', views.references, name='references'),
 
 ]
