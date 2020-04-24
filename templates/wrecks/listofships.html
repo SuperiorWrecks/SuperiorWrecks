@@ -42,10 +42,7 @@
             </tr>
             </thead>
         </table>
-        <div id="qunit-fixture"></div>
-        <script src="https://code.jquery.com/qunit/qunit-2.9.2.js">
 
-        </script>
     </center>
 
     <svg id="starTemplate" class="bi bi-star-fill star" width="1em" height="1em" viewBox="0 0 16 16"
@@ -143,7 +140,7 @@
         function funct(keyword) {
             var table = document.getElementById("table");
             var tr = table.getElementsByTagName("tr");
-
+            keyword = keyword.toUpperCase();
             console.log(tr.length);
             console.log(keyword);
             // Loop through all table rows, and hide those who don't match the search query
@@ -165,23 +162,6 @@
             }
             return "No match";
         }
-
-        function test() {
-            var key;
-            QUnit.test("Search Test", function (assert) {
-                assert.expect(3);
-                key = "ZILLAH";
-                assert.deepEqual(funct(key), "ZILLAH");
-
-                key = "EDMUND FITZGERALD";
-                assert.deepEqual(funct(key), "EDMUND FITZGERALD");
-
-                key = "EDMUND";
-                assert.deepEqual(funct(key), "No match");
-            });
-        }
-
-
     </script>
 
 {% endblock %}
