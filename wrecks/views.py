@@ -50,8 +50,8 @@ def references(request):
     return render(request, 'wrecks/references.html')
 
 
-def Game(request):
-    return render(request, 'wrecks/Game.html')
+def game(request):
+    return render(request, 'wrecks/game.html')
 
 
 def markers(request):
