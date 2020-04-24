@@ -51,16 +51,30 @@
         #submit:hover{
 	        background-color: #3b3d80;
         }
+
+        #results{
+            padding-left: 230px;
+            font-family: "Berkshire Swash";
+	        font-size: 15px;
+        }
+
+        #comment{
+            padding-left: 230px;
+            font-family: "Berkshire Swash";
+	        font-size: 15px;
+        }
     </style>
 {% endblock %}
 
+
+
 {% block content %}
     <p>
-        <img id="img"  src="static/img/Edmund_Fitzgerald_Wiki.jpg" alt="The Edmund Fitzgerald"
-             style="width:500px;height:600px;float:right">
         <div id="quiz"></div>
-        <button id="submit">Get Results</button>
+        <button id="submit">See Score</button>
         <div id="results"></div>
+        <div id="comment"></div>
+
     </p>
 {% endblock %}
 
@@ -68,8 +82,8 @@
     <script>
         var myQuestions = [
 	        {
-		        question: "What ship has the same name as a video game character?",
-		        answers: {
+		        ques: "What ship has the same name as a video game character?",
+		        ans: {
 		            a: 'Pacman',
 			        b: 'Lady Link',
 			        c: 'USS Mario',
@@ -78,8 +92,8 @@
 		            correctAnswer: 'd'
             },
             {
-                question: "Which boat was the first to sink in lake Superior?",
-                answers: {
+                ques: "Which boat was the first to sink in lake Superior?",
+                ans: {
 			        a: 'Recovery',
 			        b: 'Starlight',
 			        c: 'York',
@@ -88,8 +102,8 @@
 		            correctAnswer: 'a'
             },
             {
-		        question: "How many ships are named Roamer that have sunk?",
-		        answers: {
+		        ques: "How many ships are named Roamer that have sunk?",
+		        ans: {
 		            a: '2 ships',
 			        b: '9 ships',
 			        c: '1 ships',
@@ -98,8 +112,8 @@
 		            correctAnswer: 'a'
             },
             {
-		        question: "How many ships have sunken in the portage?",
-		        answers: {
+		        ques: "How many ships have sunken in the portage?",
+		        ans: {
 		            a: '0 ships',
 			        b: '5 ships',
 			        c: '2 ships',
@@ -108,8 +122,8 @@
 		            correctAnswer: 'c'
             },
             {
-		        question: "Which ship crashed in the Thunder Bay area?",
-		        answers: {
+		        ques: "Which ship crashed in the Thunder Bay area?",
+		        ans: {
 		            a: 'York',
 			        b: 'Sarina',
 			        c: 'Edmund Fitzgerald',
@@ -118,8 +132,8 @@
 		            correctAnswer: 'b'
             },
             {
-		        question: "What ship crashed near Houghton?",
-		        answers: {
+		        ques: "What ship crashed near Houghton?",
+		        ans: {
 		            a: 'Amboy',
 			        b: 'Sagamore',
 			        c: 'Roanoke',
@@ -131,35 +145,35 @@
 
         ];
 
-        function generateQuiz(questions, quizContainer, resultsContainer, submitButton){
+        function generateQuiz(questions, quizCon, resultsCon, submit, comments){
 
-	        function showQuestions(questions, quizContainer){
+	        function showQuestions(questions, quizCon){
 		        var output = [];
 	            var answers;
 
 	            for(var i=0; i<questions.length; i++){
 		            answers = [];
-		            for(letter in questions[i].answers){
+		            for(letter in questions[i].ans){
 			            answers.push(
 				            '<label>'
 					        + '<input type="radio" name="question'+i+'" value="'+letter+'">'
 					        + letter + ': '
-					        + questions[i].answers[letter]
+					        + questions[i].ans[letter]
 				            + '</label>     '
 			            );
 		            }
 		            output.push(
-			            '<div class="question">' + questions[i].question + '</div>'
+			            '<div class="question">' + questions[i].ques + '</div>'
                         + '<div class="answers">' + answers.join('') + '</div>'
 		            );
 	            }
 
-	            quizContainer.innerHTML = output.join('');
+	            quizCon.innerHTML = output.join('');
 	        }
 
-	        function showResults(questions, quizContainer, resultsContainer){
-                var answerContainers = quizContainer.querySelectorAll('.answers');
-                var questCon = quizContainer.querySelectorAll('.question');
+	        function showResults(questions, quizCon, resultsCon, comments){
+                var answerContainers = quizCon.querySelectorAll('.answers');
+                var questCon = quizCon.querySelectorAll('.question');
 	            var userAnswer = '';
 	            var numCorrect = 0;
 
@@ -168,27 +182,65 @@
 		            if(userAnswer===questions[i].correctAnswer){
 			            numCorrect++;
 			            questCon[i].style.color = 'limegreen';
+
 		            }
 		            else{
 			            questCon[i].style.color = 'red';
 		            }
+	            }
+
+	            resultsCon.innerHTML = 'Score: ' + numCorrect + '/' + questions.length;
+
+	            if (numCorrect === 6){
+	               // comments.innerHTML = 'Wow, you really know your ships!';
+                } else if (numCorrect > 3){
+	                comments.innerHTML = 'Great job!';
+                } else if (numCorrect > 1){
+	               comments.innerHTML = 'Nice try!';
+                } else{
+	                comments.innerHTML = 'Better luck next time!';
+                }
 	        }
 
-	// show number of correct answers out of total
-	resultsContainer.innerHTML = 'Score' + numCorrect + '/' + questions.length;
-	}
+	        showQuestions(questions, quizCon);
 
-	        showQuestions(questions, quizContainer);
+	        submit.onclick = function(){
+		        showResults(questions, quizCon, resultsCon,comments);
 
-	        submitButton.onclick = function(){
-		        showResults(questions, quizContainer, resultsContainer);
 	        }
         }
 
-        var quizContainer = document.getElementById('quiz');
-        var resultsContainer = document.getElementById('results');
-        var submitButton = document.getElementById('submit');
+        var quizCon = document.getElementById('quiz');
+        var resultsCon = document.getElementById('results');
+        var submit = document.getElementById('submit');
+        var comments = document.getElementById('comment');
 
-        generateQuiz(myQuestions, quizContainer, resultsContainer, submitButton);
+        var randQuiz = [];
+        function randomize(questions){
+            var randNum = [];
+            var currNum = 0;
+
+            for(i = 0 ; i < 7 ; i++){
+                currNum = Math.round(Math.random()*6)-1;
+                randNum[i] = currNum;
+                var randlength = randNum.length;
+                for (n = 0 ; n < randlength ; n++){
+                    if (currNum !== randNum[n]){
+                        randNum[i] = currNum;
+                    } else if (currNum === randNum[n]){
+                        i--;
+                    }
+                }
+            }
+            randQuiz[0] = questions[randNum[0]];
+            randQuiz[1] = questions[randNum[1]];
+            randQuiz[2] = questions[randNum[2]];
+            randQuiz[3] = questions[randNum[3]];
+            randQuiz[4] = questions[randNum[4]];
+            randQuiz[5] = questions[randNum[5]];
+
+        }
+
+        generateQuiz(myQuestions, quizCon, resultsCon, submit, comments);
     </script>
 {% endblock %}
