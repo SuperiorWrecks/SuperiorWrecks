@@ -136,7 +136,8 @@ class TestAllShipsView(TestCase):
         response = self.client.get(reverse(views.all_ships))
         self.assertEqual(response.status_code, 200)
         j = json.loads(response.content.decode('utf-8'))
-        self.assertTrue(len(j) == self.NUMBER_OF_SHIPS)
+        self.assertTrue(len(j) == 2)
+        self.assertTrue(len(j["ships"]) == self.NUMBER_OF_SHIPS)
 
 
 class TestDetailView(TestCase):
