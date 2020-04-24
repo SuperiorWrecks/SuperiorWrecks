@@ -56,7 +56,7 @@
 
 {% block content %}
     <p>
-        <img id="img"  src="static/img/Edmund_Fitzgerald_Wiki.jpg" alt="The Edmund Fitzgerald"
+        <img id="img"  src="/static/img/Edmund_Fitzgerald_Wiki.jpg" alt="The Edmund Fitzgerald"
              style="width:500px;height:600px;float:right">
         <div id="quiz"></div>
         <button id="submit">Get Results</button>
@@ -168,6 +168,7 @@
 		            if(userAnswer===questions[i].correctAnswer){
 			            numCorrect++;
 			            questCon[i].style.color = 'limegreen';
+
 		            }
 		            else{
 			            questCon[i].style.color = 'red';
