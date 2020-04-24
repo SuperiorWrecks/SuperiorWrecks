@@ -287,6 +287,7 @@
                         clusterMarkers[i] = markers[i];
                     }
                     markerCluster = new MarkerClusterer(map, clusterMarkers, {imagePath: "/static/img/m"});
+                    markerCluster.maxClusterRadius = 40;
                 }
             };
             xmlhttp.open("GET", "/wrecks/markers.json", true);
@@ -318,6 +319,7 @@
                 }
             }
             markerCluster = new MarkerClusterer(map, clusterMarkers, {imagePath: "/static/img/m"});
+            markerCluster.maxClusterRadius = 40;
             return "No match";
         }
 
