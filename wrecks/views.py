@@ -62,11 +62,18 @@ def markers(request):
 
 
 def all_ships(request):
-    data = []
+    data = {}
+    ships = []
+    if request.user.is_authenticated:
+        user = User.objects.get(id=request.user.id)
     for ship in Wrecks.objects.all():
         year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
         entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year}
-        data.append(entry)
+        if request.user.is_authenticated:
+            entry["fav"] = user.profile.favorite_ships.filter(ship_name=ship.ship_name, ship_num=ship.ship_num).exists()
+        ships.append(entry)
+    data["ships"] = ships
+    data["favs"] = request.user.is_authenticated
     return JsonResponse(data, safe=False)
 
 
@@ -76,13 +83,15 @@ def fav_ships(request):
 
     user = User.objects.get(id=request.user.id)
 
-    data = []
+    data = {}
+    ships = []
     for ship in user.profile.favorite_ships.all():
         year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
-        entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year}
-        data.append(entry)
+        entry = {"name": ship.ship_name, "num": ship.ship_num, "year": year, "fav": True}
+        ships.append(entry)
+    data["ships"] = ships
+    data["favs"] = True
     return JsonResponse(data, safe=False)
-
 
 def detail(request, name, num):
     name = name.replace("_", " ")
