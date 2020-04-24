@@ -10,7 +10,7 @@
             position: relative;
             z-index: 1;
         }
-        #Cool{
+        .btn2{
 	        font-family: "Berkshire Swash";
 	        font-size: 15px;
 	        background-color: darkblue;
@@ -19,6 +19,9 @@
 	        border-radius: 3px;
 	        padding: 2px;
 	        cursor: pointer;
+        }
+        .btn2 button:hover {
+             background-color: lightblue;
         }
         #ok{
             font-family: "Brekshire Swash";
@@ -42,7 +45,7 @@
 
     </div>
     </div>
-    <button id="Cool" onclick="newFact()"> Fact!</button>
+    <button class="btn2" onclick="newFact()"> Click Me For A Fact!</button>
 
 
 {% endblock %}
