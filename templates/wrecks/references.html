@@ -10,30 +10,70 @@
             position: relative;
             z-index: 1;
         }
-
         #content c {
             font-family: "Berkshire Swash", cursive;
-            font-size: 30px;
+            font-size: 10px;
+        }
+        .btn button {
+             background-color: darkturquoise;
+             border: 1px solid green;
+             color: white;
+             padding: 10px 24px;
+             cursor: pointer;
+            display: block;
         }
 
+        .btn button:not(:last-child) {
+            border-bottom: none;
+        }
+
+        .btn button:hover {
+             background-color: darkcyan;
+        }
     </style>
 {% endblock %}
 
-{% block noncontent%}
-<div id="content"><c>References</c></div>
-{% endblock %}
-
 {% block content %}
-        {% if refern.exists %}
-            <p>
-            <ul>
-                {% for reference in refern %}
-                    <li><cite><a href="{{ reference.url }}">{{ reference.text }}</a></cite></li>
-                {% endfor %}
-            </ul>
-            </p>
-        {% endif %}
-{% endblock %}
 
+    <div class="btn button">
+        <button type="button" onclick ><span onclick= "window.open('http://images.maritimehistoryofthegreatlakes.ca/57599/data')"> http://images.maritimehistoryofthegreatlakes.ca/57599/data </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Algoma')"> https://en.wikipedia.org/wiki/SS_Algoma </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Chester_A._Congdon')"> https://en.wikipedia.org/wiki/SS_Chester_A._Congdon </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/PS_Cumberland')"> https://en.wikipedia.org/wiki/PS_Cumberland </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald')"> https://en.wikipedia.org/wiki/SS_Edmund_Fitzgerald </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.shipwreckmuseum.com/shipwreck-museum/group-visits/')">https://www.shipwreckmuseum.com/shipwreck-museum/group-visits/  </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Emperor')"> https://en.wikipedia.org/wiki/SS_Emperor </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_John_M._Osborn')"> https://en.wikipedia.org/wiki/SS_John_M._Osborn </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.wisconsinshipwrecks.org/Vessel/Details/518')"> https://www.wisconsinshipwrecks.org/Vessel/Details/518 </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.wisconsinshipwrecks.org/Vessel/Details/523')"> https://www.wisconsinshipwrecks.org/Vessel/Details/523  </span></button>
+        <button type="button" onclick ><span onclick= "window.open('https://saveontarioshipwrecks.ca/buoysites/rappahannock/')"> https://saveontarioshipwrecks.ca/buoysites/rappahannock/ </span></button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Robert_Wallace')"> https://en.wikipedia.org/wiki/SS_Robert_Wallace  </span></button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.shipwreckexplorers.com/whaleback-sagamore/')"> https://www.shipwreckexplorers.com/whaleback-sagamore/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://wikivisually.com/wiki/Sagamore_%28barge%29')"> https://wikivisually.com/wiki/Sagamore_%28barge%29 </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.shipwreckexplorers.com/steamer-samuel-mather/')"> https://www.shipwreckexplorers.com/steamer-samuel-mather/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.nps.gov/piro/learn/historyculture/upload/Shipwrecks.pdf')"> https://www.nps.gov/piro/learn/historyculture/upload/Shipwrecks.pdf </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Scotiadoc')"> https://en.wikipedia.org/wiki/SS_Scotiadoc </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.wisconsinshipwrecks.org/Vessel/Details/565?region=Index')"> https://www.wisconsinshipwrecks.org/Vessel/Details/565?region=Index </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://publications.aqua.wisc.edu/product-category/shipwrecks/')"> https://publications.aqua.wisc.edu/product-category/shipwrecks/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('http://www.alpenashipwrecktours.com/shipwreck-tours/')"> http://www.alpenashipwrecktours.com/shipwreck-tours/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.nps.gov/piro/learn/historyculture/upload/Shipwrecks.pdf')"> https://www.nps.gov/piro/learn/historyculture/upload/Shipwrecks.pdf </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://shipwrecktours.com/the-smith-moore/')"> https://shipwrecktours.com/the-smith-moore/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://3dshipwrecks.org/shipwreck-strathmore/')"> https://3dshipwrecks.org/shipwreck-strathmore/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.shipwreckexplorers.com/freighter-superior-city/')"> https://www.shipwreckexplorers.com/freighter-superior-city/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Superior_City')"> https://en.wikipedia.org/wiki/SS_Superior_City </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.wisconsinshipwrecks.org/Vessel/Details/597?region=Index')"> https://www.wisconsinshipwrecks.org/Vessel/Details/597?region=Index </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Thomas_Wilson')"> https://en.wikipedia.org/wiki/SS_Thomas_Wilson </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.chicagotribune.com/travel/ct-shipwreck-coast-lake-superior-travel-0730-20170714-story.html')"> https://www.chicagotribune.com/travel/ct-shipwreck-coast-lake-superior-travel-0730-20170714-story.html </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('http://www.mnhs.org/places/nationalregister/shipwrecks/essex/esspd.php')">http://www.mnhs.org/places/nationalregister/shipwrecks/essex/esspd.php  </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.wisconsinshipwrecks.org/Vessel/Details/624?region=Index')"> https://www.wisconsinshipwrecks.org/Vessel/Details/624?region=Index </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.shipwreckexplorers.com/steamer-s-s-vienna/')"> https://www.shipwreckexplorers.com/steamer-s-s-vienna/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.wisconsinshipwrecks.org/Vessel/Details/817?region=Index')"> https://www.wisconsinshipwrecks.org/Vessel/Details/817?region=Index </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/SS_Vienna_(1873)')"> https://en.wikipedia.org/wiki/SS_Vienna_(1873) </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('http://www.thegreatwaters.com/member-profile/123/326/')"> http://www.thegreatwaters.com/member-profile/123/326/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('http://www.baillod.com/shipwreck/keweenaw/wasaga.html')"> http://www.baillod.com/shipwreck/keweenaw/wasaga.html </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://www.shipwreckexplorers.com/freighter-zillah/')"> https://www.shipwreckexplorers.com/freighter-zillah/ </span> </button>
+        <button type="button" onclick ><span onclick= "window.open('https://en.wikipedia.org/wiki/List_of_shipwrecks_in_the_Great_Lakes')">https://en.wikipedia.org/wiki/List_of_shipwrecks_in_the_Great_Lakes  </span> </button>
+    </div>
+{% endblock %}
 
 
