@@ -50,6 +50,10 @@ def references(request):
     return render(request, 'wrecks/references.html')
 
 
+def Game(request):
+    return render(request, 'wrecks/Game.html')
+
+
 def markers(request):
     data = []
     for ship in Wrecks.objects.all():
@@ -92,6 +96,7 @@ def fav_ships(request):
     data["ships"] = ships
     data["favs"] = True
     return JsonResponse(data, safe=False)
+
 
 def detail(request, name, num):
     name = name.replace("_", " ")

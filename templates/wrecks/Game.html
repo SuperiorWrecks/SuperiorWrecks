@@ -1,0 +1,75 @@
+{% extends "wrecks/template.html" %}
+{% block title %}
+    <title>Fun Facts!</title>
+{% endblock %}
+
+{% block styles %}
+    <style>
+        #content {
+            background: transparent;
+            position: relative;
+            z-index: 1;
+        }
+        #Cool{
+	        font-family: "Berkshire Swash";
+	        font-size: 15px;
+	        background-color: darkblue;
+	        color: #fff;
+	        border: 5px;
+	        border-radius: 3px;
+	        padding: 2px;
+	        cursor: pointer;
+        }
+        #ok{
+            font-family: "Brekshire Swash";
+            font-size: 40px;
+            color: #3b3d80;
+        }
+        #fun1{
+            font-family: "Brekshire Swash";
+            font-size: 30px;
+        }
+
+    </style>
+{% endblock %}
+
+{% block content %}
+    <div id="ok">
+    Fun Fact!
+    </div>
+    <div id="fun1">
+    <div id="randomfact">
+
+    </div>
+    <button id="Cool" onclick="newFact()"> Fact!</button>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script>
+    var randomNumber = Math.floor(Math.random()*20);
+
+    var names =[
+        'Lake Superior is the cleanest and clearest of all Great Lakes.' +
+        'On average, you can see the underwater depth to a depth of about eight feet',
+        'Lake Superior is the coldest Great Lake. On average, the lake is 4 degrees Celsius.',
+        'The Apostle Island Sea Caves is one of Lake Superior\'s greatest tourist attractions.' +
+        'The Caves create massive drifts and icicles.' ,
+        'The red sandstone caves on Devil\'s Island were carved by Lake Superior\'s waves.',
+        'Lake Superior is the largest of the Great Lakes and is the largest freshwater lake in the world.',
+        'Lake Superior holds 10 percent of the world\'s total fresh surface water.',
+        'Lake Superior\'s average depth is about 148 meters.',
+        'Lake Superior could cover all of North and South America with one foot of water.',
+        'Lake Superior is known to have ultra-foggy conditions and ruthless storms.',
+        'There are more than 300 streams and rivers feeding into Lake Superior.',
+        'If in a straight line, Lake Superior\'s shoreline would measure 2,938 kilometers.'
+    ]
+
+    function newFact(){
+        var randomNumber = Math.floor(Math.random()*(names.length));
+        document.getElementById('randomfact').innerHTML = names[randomNumber];
+    }
+
+    </script>
+{% endblock %}

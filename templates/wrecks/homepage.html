@@ -206,19 +206,29 @@
 
         }
         function hideIconRed(marker){
-            for( var i=0; i < icons.red.icon.length-1; i++ ) {
-                marker.display.red.icon = "none";
+            var Redship = true;
+            if (Redship = true) {
+                for (var i = 0; i < addMarker().icon.red.length - 1; i++) {
+                     document.getElementsByName(marker.red).style.display="none";
+
+                    //marker.display.icon.red = "none";
+                }
+                Redship = false;
+            } else if (Redship = false) {
+                for (var i = 0; i < addMarker().icon.red.length - 1; i++) {
+                     document.getElementsByName(marker.red).style.display="";
+                }
             }
-            }
+        }/*
         function hideIconBlue(marker){
                 marker.display = "none";
-            }
+        }
         function hideIconGreen(marker){
                 marker.display = "none";
-            }
+        }
         function hideIconBlack(marker){
                 marker.display = "none";
-            }
+        }*/
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {

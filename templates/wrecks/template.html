@@ -72,6 +72,9 @@
             <a class="nav-link {% if request.resolver_match.url_name == "trivia" %}active{% endif %}" href="{% url "trivia" %}">Trivia</a>
         </li>
         <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "Fun Facts!" %}active{% endif %}" href="{% url "Fun Facts!" %}">Fun Facts!</a>
+        </li>
+        <li>
             <a class="nav-link {% if request.resolver_match.url_name == "references" %}active{% endif %}" href="{% url "references" %}">References</a>
         </li>
          <p>
