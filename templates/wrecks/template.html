@@ -54,37 +54,26 @@
                        onkeyup="funct(this.value.toUpperCase())">
             </form>
         </li>
-        {% if page != "map" %}
+{#        <li class="{% if request.resolver_match.url_name == "my_view_name" %}active{% endif %}">#}
+{#            <a href="{% url "my_view_name" %}">Shortcut1</a>#}
+{#        </li>#}
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "map" %}active{% endif %}" href="{% url "map" %}">Map</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "ships" %}active{% endif %}" href="{% url "ships" %}">List All Wrecks</a>
+        </li>
+        {% if user.is_authenticated %}
             <li>
-                <a class="nav-link" href="/">Back to Map</a>
+            <a class="nav-link {% if request.resolver_match.url_name == "favs" %}active{% endif %}" href="{% url "favs" %}">Favorites</a>
             </li>
         {% endif %}
-        {% if page != "ships" %}
-            <li>
-                <a class="nav-link" href="/ships">List all Wrecks</a>
-            </li>
-        {% endif %}
-        {% if page != "detail" %}
-            <li>
-                <a class="nav-link" href="#">More Information</a>
-            </li>
-        {% endif %}
-        {% if page != "favorites" and user.is_authenticated %}
-            <li>
-                <a class="nav-link" href="/favorites">Favorites</a>
-            </li>
-        {% endif %}
-        {% if page != "trivia" %} {# Stephanie start #}
-            <li>
-                <a class="nav-link" href="/trivia">Trivia</a>
-            </li>
-        {% endif %}  {# steph end #}
-        {% if page != "references" %}
-            <li>
-                <a class="nav-link" href="/references">references</a>
-            </li>
-        {% endif %}
-
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "trivia" %}active{% endif %}" href="{% url "trivia" %}">Trivia</a>
+        </li>
+        <li>
+            <a class="nav-link {% if request.resolver_match.url_name == "references" %}active{% endif %}" href="{% url "references" %}">References</a>
+        </li>
     </ul>
 </nav>
 

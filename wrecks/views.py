@@ -1,21 +1,20 @@
-import os
-import dotenv
 import logging
+import os
 
 import django.views.defaults
-from django.http import Http404, JsonResponse, HttpResponse
-from django.shortcuts import render, redirect
+import dotenv
 from django.contrib.auth import logout
 from django.core.exceptions import ObjectDoesNotExist
+from django.http import Http404, JsonResponse, HttpResponse
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import Wrecks
 from .models import Photos
-from .models import Stories
 from .models import References
-from .models import Visit
+from .models import Stories
 from .models import User
-from .models import Profile
+from .models import Visit
+from .models import Wrecks
 
 dotenv.load_dotenv(dotenv.find_dotenv())
 
@@ -25,39 +24,31 @@ logger = logging.getLogger(__name__)
 def homepage(request):
     context = {
         'GOOGLE_API_KEY': os.getenv("GOOGLE_API_KEY"),
-        "page": "map",
     }
     return render(request, 'wrecks/homepage.html', context)
 
 
-def listofships(request):
+def list_of_ships(request):
     context = {
-        "page": "ships",
-        "url": reverse(allShips),
+        "url": reverse(all_ships),
     }
     return render(request, 'wrecks/listofships.html', context)
 
 
-def listoffavs(request):
+def list_of_favs(request):
     context = {
-        "page": "favorites",
-        "url": reverse(favShips),
+        "url": reverse(fav_ships),
     }
     return render(request, 'wrecks/listofships.html', context)
-
-def references(request):
-    context = {
-        "page": "references",
-        "url": reverse(references),
-    }
-    return render(request, 'wrecks/references.html', context)
 
 
 def trivia(request):
-    context = {
-        "page": "trivia",
-    }
-    return render(request, 'wrecks/trivia.html', context)
+    return render(request, 'wrecks/trivia.html')
+
+
+def references(request):
+    return render(request, 'wrecks/references.html')
+
 
 def markers(request):
     data = []
@@ -70,7 +61,7 @@ def markers(request):
     return JsonResponse(data, safe=False)
 
 
-def allShips(request):
+def all_ships(request):
     data = []
     for ship in Wrecks.objects.all():
         year = ship.year_sunk if ship.date_sunk is None else ship.date_sunk.year
@@ -79,8 +70,8 @@ def allShips(request):
     return JsonResponse(data, safe=False)
 
 
-def favShips(request):
-    if (not request.user.is_authenticated):
+def fav_ships(request):
+    if not request.user.is_authenticated:
         return HttpResponse(403)
 
     user = User.objects.get(id=request.user.id)
@@ -112,17 +103,16 @@ def detail(request, name, num):
         "stories": stories,
         "references": references,
         "visit_wreck": visit_wreck,
-        "page": "detail",
     }
 
-    if (request.user.is_authenticated):
+    if request.user.is_authenticated:
         user = User.objects.get(id=request.user.id)
         context["starred"] = user.profile.favorite_ships.filter(ship_name=name, ship_num=num).count()
 
     return render(request, 'wrecks/shipdetail.html', context)
 
 
-def changeFavorite(request):
+def toggle_favorite(request):
     if not request.user.is_authenticated:
         return django.views.defaults.HttpResponseForbidden()
 
