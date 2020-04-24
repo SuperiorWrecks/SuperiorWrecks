@@ -55,13 +55,13 @@
         #results{
             padding-left: 230px;
             font-family: "Berkshire Swash";
-	        font-size: 15px;
+	        font-size: 21px;
         }
 
         #comment{
             padding-left: 230px;
             font-family: "Berkshire Swash";
-	        font-size: 15px;
+	        font-size: 21px;
         }
     </style>
 {% endblock %}
@@ -81,6 +81,16 @@
 {% block scripts %}
     <script>
         var myQuestions = [
+            {
+		        ques: "What ship crashed closest to Duluth?",
+		        ans: {
+		            a: 'Stranger',
+			        b: 'Edmund Fitzgerald',
+			        c: 'Winslow',
+                    d: 'V. Swain'
+		        },
+		            correctAnswer: 'c'
+            },
 	        {
 		        ques: "What ship has the same name as a video game character?",
 		        ans: {
@@ -216,31 +226,24 @@
         var comments = document.getElementById('comment');
 
         var randQuiz = [];
+
         function randomize(questions){
             var randNum = [];
             var currNum = 0;
+            var copyof = questions;
+            var max = 6;
+            var randArray = [0,0,1,2,3,4,5,6];
 
-            for(i = 0 ; i < 7 ; i++){
-                currNum = Math.round(Math.random()*6)-1;
-                randNum[i] = currNum;
-                var randlength = randNum.length;
-                for (n = 0 ; n < randlength ; n++){
-                    if (currNum !== randNum[n]){
-                        randNum[i] = currNum;
-                    } else if (currNum === randNum[n]){
-                        i--;
-                    }
-                }
+            for(i = 0 ; i < 5 ; i++){
+                currNum = Math.round(Math.random()*max);
+                randQuiz[i] = questions[randArray[currNum]];
+                randArray.splice(currNum,1);
+                max--;
             }
-            randQuiz[0] = questions[randNum[0]];
-            randQuiz[1] = questions[randNum[1]];
-            randQuiz[2] = questions[randNum[2]];
-            randQuiz[3] = questions[randNum[3]];
-            randQuiz[4] = questions[randNum[4]];
-            randQuiz[5] = questions[randNum[5]];
-
         }
 
-        generateQuiz(myQuestions, quizCon, resultsCon, submit, comments);
+        randomize(myQuestions);
+
+        generateQuiz(randQuiz, quizCon, resultsCon, submit, comments);
     </script>
 {% endblock %}
