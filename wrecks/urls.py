@@ -14,6 +14,6 @@ urlpatterns = [
     path('favorite', views.toggle_favorite),
     path('trivia/', views.trivia, name='trivia'),
     path('references/', views.references, name='references'),
-    path('Game/', views.Game, name='Fun Facts!'),
+    path('game/', views.game, name='Fun Facts!'),
 
 ]
