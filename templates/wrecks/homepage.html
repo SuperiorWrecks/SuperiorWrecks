@@ -199,24 +199,26 @@
             marker.addListener('mouseover', () => infoWindow.open(map, marker));
             marker.addListener('click', () => showSidebar(marker));
             marker.addListener('mouseout', () => infoWindow.close());
-            marker.addListener('',() => hideIconRed(marker));
+            //marker.addListener('click',() => hideIconRed(marker));
             //marker.addListener('')
             markers.push(marker);
 
 
         }
         function hideIconRed(marker){
-                marker.display = "none";
-            };
+            for( var i=0; i < icons.red.icon.length-1; i++ ) {
+                marker.display.red.icon = "none";
+            }
+            }
         function hideIconBlue(marker){
                 marker.display = "none";
-            };
+            }
         function hideIconGreen(marker){
                 marker.display = "none";
-            };
+            }
         function hideIconBlack(marker){
                 marker.display = "none";
-            };
+            }
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -239,7 +241,7 @@
                 var icon = type.icon;
                 var button = type.button;
                 var div = document.createElement('div');
-                div.innerHTML = '<img src="' + icon + '"> ' + name + button;
+                div.innerHTML = '<img src="' + icon + '"> ' + name;
                 legend.appendChild(div);
             }
 
